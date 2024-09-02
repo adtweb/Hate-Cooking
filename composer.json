@@ -2,11 +2,15 @@
     "name": "adt/hate-cooking",
     "description": "Blog for quick food recipes",
     "type": "project",
-    "keywords": ["blog", "laravel"],
+    "keywords": [
+        "blog",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.2",
+        "filament/forms": "^3.2",
         "laravel-json-api/laravel": "^4.0",
         "laravel/framework": "^11.0",
         "laravel/horizon": "^5.24",
@@ -38,7 +42,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
