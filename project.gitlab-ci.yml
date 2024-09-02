@@ -1,0 +1,175 @@
+include:
+  - project: 'inetstudio/gitlab-cicd-global-templates'
+    ref: experimental   # Git branch / SHA / TAG
+    file:
+      - 'Deployment-setup.template.yml'
+      - 'Build-and-push-docker-images.template.yml'
+
+stages:
+  - build
+  - lint
+  - test
+  - publish
+  - deploy
+  - cleanup
+
+variables:
+  COMPOSER_AUTH: >-
+    {"gitlab-domains":["$CI_SERVER_HOST"],"gitlab-token":{"$CI_SERVER_HOST":{"username":"$CICD_PACKAGES_DEPLOY_TOKEN_NAME","token":"$CICD_PACKAGES_DEPLOY_TOKEN_KEY"}}}
+
+  SSH_DEVELOP_CONNECTION: deploy@10.10.10.7
+
+  SWARM_STACK_NAME: [swarm_stack_name]
+  SWARM_SERVICE_NAME: [swarm_service_name]
+  # Нельзя использовать переменные из-за ограничения на символ "_"
+  SWARM_SERVICE_FULL_NAME: [swarm_stack_name]_[swarm_service_name]
+
+  DEVELOP_ENVIRONMENT_URL: [develop_environment_url]
+
+
+
+".exec-image-command":
+  image: docker:cli
+  services:
+    - docker:dind
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $IMAGE
+    - docker run --rm -w /var/www/html $IMAGE $COMMAND
+
+
+
+# BUILD
+
+build.docker-image:
+  stage: build
+  image: docker:cli
+  services:
+    - docker:dind
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - >
+      docker build
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --file docker/laravel/Dockerfile
+      --build-arg COMPOSER_AUTH=$COMPOSER_AUTH
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags: [ shared-build ]
+
+
+
+# LINT
+
+".lint_base":
+  extends: [ .exec-image-command ]
+  stage: lint
+  needs: [ build.docker-image ]
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags: [ shared-lint ]
+
+#lint.phpstan:
+#  extends:
+#    - .lint_base
+#  variables:
+#    COMMAND: ./vendor/bin/phpstan analyse --memory-limit=2G --error-format=gitlab
+
+lint.pint:
+  extends:
+    - .lint_base
+  variables:
+    COMMAND: ./vendor/bin/pint --test -v
+
+
+
+# TEST
+
+.test-base:
+  extends: [ .exec-image-command ]
+  stage: test
+  needs: [ build.docker-image ]
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags: [ shared-lint ]
+
+test.phpunit:
+  extends:
+    - .test-base
+  variables:
+    COMMAND: ./vendor/bin/phpunit
+
+
+# PUBLISH
+
+publish.docker-image:
+  stage: publish
+  image: docker:cli
+  services:
+    - docker:dind
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push "$CI_REGISTRY_IMAGE:latest"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags: [ shared-deploy ]
+
+
+
+# DEPLOY - Send redeploy command to swarm stack
+
+".deploy":
+  stage: deploy
+  extends: .deployment:setup
+  needs: [ publish.docker-image ]
+  image: docker:26.1.3
+  script:
+    - ssh $SSH_CONNECTION "docker service update --force --image $IMAGE $SWARM_SERVICE_FULL_NAME"
+  tags: [ shared-deploy ]
+
+deploy.develop:
+  extends: .deploy
+  variables:
+    SSH_CONNECTION: $SSH_DEVELOP_CONNECTION
+    SSH_DEPLOYMENT_KEY: $STAGING_PRIVATE_KEY
+    SWARM_SERVICE_FULL_NAME: $SWARM_SERVICE_FULL_NAME
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  environment:
+    name: develop
+    url: $DEVELOP_ENVIRONMENT_URL
+
+
+
+# CLEANUP - Удаление лишних образов
+
+cleanup.docker-image:
+  stage: cleanup
+  image: curlimages/curl:7.86.0
+  before_script:
+    - curl --fail --show-error --location "https://github.com/genuinetools/reg/releases/download/v0.16.1/reg-linux-amd64" --output ./reg
+    - chmod a+x ./reg
+  script:
+    - ./reg rm -d --auth-url $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $IMAGE
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  tags: [ shared-deploy ]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

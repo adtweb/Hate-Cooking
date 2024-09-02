@@ -1,0 +1,100 @@
+---
+
+version: "3.8"
+
+
+services:
+
+
+    laravel:
+        build:
+            context: .
+            dockerfile: docker/laravel/Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+                COMPOSER_REPO_TOKEN: '${COMPOSER_REPO_TOKEN}'
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            PHP_IDE_CONFIG: '${PHP_IDE_CONFIG:-serverName=Docker}'
+        volumes:
+            - ".:/var/www/html"
+        networks:
+            - application
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:80/up"]
+            retries: 3
+            timeout: 5s
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            mailpit:
+                condition: service_started
+
+
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'application-mysql:/var/lib/mysql'
+        networks:
+            - application
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-u${DB_USERNAME}", "-p${DB_PASSWORD}", "--silent"]
+            retries: 3
+            timeout: 5s
+
+
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'application-redis:/data'
+        networks:
+            - application
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+
+
+    mailpit:
+        image: 'axllent/mailpit:latest'
+        ports:
+            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - application
+
+
+
+networks:
+    application:
+        driver: bridge
+
+
+
+volumes:
+    application-mysql:
+        driver: local
+    application-redis:
+        driver: local
