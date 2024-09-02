@@ -2,6 +2,8 @@
     "name": "adt/hate-cooking",
     "description": "Blog for quick food recipes",
     "type": "project",
+    "keywords": ["blog", "laravel"],
+    "license": "MIT",
     "require": {
         "php": "^8.2",
         "laravel-json-api/laravel": "^4.0",
