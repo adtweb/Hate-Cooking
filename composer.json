@@ -1,13 +1,7 @@
 {
-    "name": "inetstudio/laravel-sail-template",
-    "description": "Шаблон для разработки Laravel проектов/сервисов в компании Inetstudio",
+    "name": "adt/hate-cooking",
+    "description": "Blog for quick food recipes",
     "type": "project",
-    "repositories": {
-        "22": {
-            "type": "composer",
-            "url": "https://inetstudio.gitlab.yandexcloud.net/api/v4/group/22/-/packages/composer/"
-        }
-    },
     "require": {
         "php": "^8.2",
         "laravel-json-api/laravel": "^4.0",

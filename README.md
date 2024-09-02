@@ -1,3 +1,6 @@
+## Description
+A project for publishing recipes for dishes that take no more than 30 minutes to prepare.
+
 ## Laravel
 Docs: [https://laravel.com/docs/11.x/sail](https://laravel.com/docs/11.x/sail)
 
