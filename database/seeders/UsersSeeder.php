@@ -31,7 +31,7 @@ class UsersSeeder extends Seeder
             'email' => 'sigva@yandex.ru',
             'password' => bcrypt('SuperSecretPassword'),
             'email_verified_at' => now(),
-            'role_id' => Role::skip(1)->first()->id, // Author
+            'role_id' => Role::skip(2)->first()->id, // Author
         ]);
     }
 }
