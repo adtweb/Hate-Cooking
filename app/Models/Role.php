@@ -9,12 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Permission extends Model
+class Role extends Model
 {
-    protected $fillable = ['name'];
-
-    public function roles()
+    public function permissions()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Permission::class);
     }
 }
