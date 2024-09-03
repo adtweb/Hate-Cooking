@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('name');
             $table->float('quantity');
             $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
-            $table->foreignUuid('measures_id')->constrained('measures')->cascadeOnDelete();;
+            $table->foreignUuid('measure_id')->constrained('measures')->cascadeOnDelete();;
             $table->timestamps();
         });
     }
