@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug');
             $table->string('name');
-            $table->foreignId('user_id')->index();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->index();
             $table->string('photo_url');
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('photo_url');
             $table->text('description');
-            $table->foreignUuid('recipe_id')->constrained('recipes')->cascadeOnDelete();;
+            $table->foreignUuid('recipe_id')->constrained('recipes')->cascadeOnDelete();
             $table->timestamps();
         });
     }
