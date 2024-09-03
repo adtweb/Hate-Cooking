@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug');
             $table->string('name');
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->index();
+            $table->unsignedBigInteger('user_id')->constrained('users')->cascadeOnDelete()->index();
             $table->string('photo_url');
             $table->timestamps();
         });
