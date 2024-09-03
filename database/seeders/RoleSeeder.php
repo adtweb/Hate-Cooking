@@ -17,12 +17,4 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'Moderator']);
         Role::create(['name' => 'Author']);
     }
-
-    public static function boot() {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
-    }
 }
