@@ -21,4 +21,19 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class);
     }
+
+    public static function administrator()
+    {
+        return self::first()->id;
+    }
+
+    public static function moderator()
+    {
+        return self::skip(1)->first()->id;
+    }
+
+    public static function author()
+    {
+        return self::skip(2)->first()->id;
+    }
 }
