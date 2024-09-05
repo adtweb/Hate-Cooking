@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recipe_category', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->foreignUuid('recipe_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('category_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -22,6 +22,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('recipe_category', function (Blueprint $table): void {
+            $table->dropForeign(['recipe_id']);
+            $table->dropForeign(['category_id']);
+        });
         Schema::dropIfExists('recipe_category');
     }
 };
