@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Recipy;
 use App\Models\Quality;
+use Illuminate\Support\Str;
 
 class QualitiesSeeder extends Seeder
 {
@@ -13,10 +13,25 @@ class QualitiesSeeder extends Seeder
      */
     public function run(): void
     {
-        Quality::create(['name' => 'Вегетарианское']);
-        Quality::create(['name' => 'Без глютена']);
-        Quality::create(['name' => 'Без лактозы']);
-        Quality::create(['name' => 'Низкокалорийное']);
-        Quality::create(['name' => 'Высококалорийное']);
+        Quality::create([
+            'value' => $name = 'Вегетарианское',
+            'slug' => Str::slug($name)
+            ]);
+        Quality::create([
+            'value' => $name = 'Без глютена',
+            'slug' => Str::slug($name)
+        ]);
+        Quality::create([
+            'value' => $name = 'Без лактозы',
+            'slug' => Str::slug($name)
+        ]);
+        Quality::create([
+            'value' => $name = 'Низкокалорийное',
+            'slug' => Str::slug($name)
+        ]);
+        Quality::create([
+            'value' => $name = 'Высококалорийное',
+            'slug' => Str::slug($name)
+        ]);
     }
 }

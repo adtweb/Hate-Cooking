@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('value');
             $table->string('slug');
-            $table->string('name');
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->index();
             $table->string('photo_url');
             $table->timestamps();

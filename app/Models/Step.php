@@ -21,6 +21,7 @@ class Step extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'order',
         'photo_url',
         'description',
         'recipe_id',

@@ -16,7 +16,7 @@ class Quality extends Model
     use HasUuids;
     use Notifiable;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['value', 'slug'];
 
     public function recipes(): BelongsToMany
     {

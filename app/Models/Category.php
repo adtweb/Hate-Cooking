@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 
-class Categories extends Model
+class Category extends Model
 {
     use HasFactory;
     use HasUuids;
     use Notifiable;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['value', 'slug'];
 
     /**
      * Get the recipes for the categories.
