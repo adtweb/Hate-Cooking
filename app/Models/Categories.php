@@ -12,7 +12,7 @@ class Categories extends Model
 {
     protected $fillable = ['name'];
 
-    public function recipes()
+    public function recipes(): BelongsToMany
     {
         return $this->belongsToMany(Recipe::class);
     }
