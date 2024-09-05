@@ -10,16 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 
-class Permission extends Model
+class Category extends Model
 {
     use HasFactory;
     use HasUuids;
     use Notifiable;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['value', 'slug'];
 
-    public function roles(): BelongsToMany
+    /**
+     * Get the recipes for the categories.
+     */
+    public function recipes(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Recipe::class);
     }
 }
