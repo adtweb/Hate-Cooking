@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->foreignUuid('recipe_category_id')->constrained('recipe_category')->after('user_id')->nullOnDelete();
-            $table->foreignUuid('recipe_quality_id')->constrained('recipe_quality')->after('recipe_category_id')->nullOnDelete();
+            $table->foreignUuid('category_id')->constrained()->after('user_id')->nullOnDelete();
+            $table->foreignUuid('quality_id')->constrained()->after('category_id')->nullOnDelete();
         });
     }
 
@@ -23,10 +23,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->dropForeign('recipe_quality_id');
-            $table->dropColumn('recipe_quality_id');
-            $table->dropForeign('recipe_category_id');
-            $table->dropColumn('recipe_category_id');
+            $table->dropForeign('quality_id');
+            $table->dropColumn('quality_id');
+            $table->dropForeign('category_id');
+            $table->dropColumn('category_id');
         });
     }
 };
