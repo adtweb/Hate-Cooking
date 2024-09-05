@@ -15,28 +15,28 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'value' => $name = 'Салат',
-            'slug' => Str::slug($name)
+            'value' => 'Салат',
+            'slug' => 'salad'
         ]);
         Category::create([
-            'value' => $name = 'Второе блюдо',
-            'slug' => Str::slug($name)
+            'value' => 'Второе блюдо',
+            'slug' => 'main-course'
         ]);
         Category::create([
-            'value' => $name = 'Суп',
-            'slug' => Str::slug($name)
+            'value' => 'Суп',
+            'slug' => 'soup'
         ]);
         Category::create([
-            'value' => $name = 'Закуска',
-            'slug' => Str::slug($name)
+            'value' => 'Закуска',
+            'slug' => 'snack'
         ]);
         Category::create([
-            'value' => $name = 'Мясо',
-            'slug' => Str::slug($name)
+            'value' => 'Мясо',
+            'slug' => 'meat'
         ]);
         Category::create([
-            'value' => $name = 'Рыба',
-            'slug' => Str::slug($name)
+            'value' => 'Рыба',
+            'slug' => 'fish'
         ]);
     }
 }

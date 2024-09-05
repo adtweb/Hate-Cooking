@@ -14,24 +14,24 @@ class QualitiesSeeder extends Seeder
     public function run(): void
     {
         Quality::create([
-            'value' => $name = 'Вегетарианское',
-            'slug' => Str::slug($name)
+            'value' => 'Вегетарианское',
+            'slug' => 'vegetarian'
             ]);
         Quality::create([
-            'value' => $name = 'Без глютена',
-            'slug' => Str::slug($name)
+            'value' => 'Без глютена',
+            'slug' => 'gluten-free'
         ]);
         Quality::create([
             'value' => $name = 'Без лактозы',
-            'slug' => Str::slug($name)
+            'slug' => 'lactose-free'
         ]);
         Quality::create([
             'value' => $name = 'Низкокалорийное',
-            'slug' => Str::slug($name)
+            'slug' => 'low-calorie'
         ]);
         Quality::create([
             'value' => $name = 'Высококалорийное',
-            'slug' => Str::slug($name)
+            'slug' => 'high-calorie'
         ]);
     }
 }
