@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->index();
+            $table->foreignUuid('recipe_id')->constrained('recipes')->cascadeOnDelete()->index();
+            $table->text('comment');
             $table->timestamps();
         });
     }
@@ -22,6 +25,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('comments', function (Blueprint $table): void {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['recipe_id']);
+        });
         Schema::dropIfExists('comments');
     }
 };

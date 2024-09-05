@@ -55,4 +55,12 @@ class Recipe extends Model
     {
         return $this->belongsToMany(Quality::class);
     }
+
+    /**
+     * Get the comments for the recipe.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
