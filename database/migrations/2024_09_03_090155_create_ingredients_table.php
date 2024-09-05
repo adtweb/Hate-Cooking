@@ -32,8 +32,8 @@ return new class extends Migration
             $table->string('value');
             $table->string('slug');
             $table->float('quantity');
-            $table->foreignUuid('product_id')->constrained('products')->cascadeOnDelete();
-            $table->foreignUuid('measure_id')->constrained('measures')->cascadeOnDelete();;
+            $table->foreignUuid('product_id')->cascadeOnDelete();
+            $table->foreignUuid('measure_id')->cascadeOnDelete();;
             $table->timestamps();
         });
     }

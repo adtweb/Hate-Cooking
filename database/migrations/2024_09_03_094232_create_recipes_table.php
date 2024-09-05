@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('value');
             $table->string('slug')->unique();
-            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete()->index();
+            $table->foreignUuid('user_id')->index()->cascadeOnDelete();
             $table->string('photo_url');
             $table->timestamps();
         });
