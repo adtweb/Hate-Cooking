@@ -40,7 +40,8 @@ class QualityResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('value'),
+                Tables\Columns\TextColumn::make('slug'),
             ])
             ->filters([
                 //
