@@ -8,11 +8,13 @@ use App\Models\Recipe;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class RecipeResource extends Resource
 {
@@ -26,15 +28,9 @@ class RecipeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('value')
                     ->maxLength(255)
-                    ->required(),
-                Forms\Components\TextInput::make('slug')
-                    ->maxLength(255)
-                    ->required(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'value'),
-                Forms\Components\Select::make('quality_id')
-                    ->relationship('quality', 'value')
-                    ->required(),
+                    ->required()
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\FileUpload::make('photo_url')
                     ->required(),
             ]);
