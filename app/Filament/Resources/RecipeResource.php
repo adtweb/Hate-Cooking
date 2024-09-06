@@ -33,10 +33,10 @@ class RecipeResource extends Resource
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'value')
-                    ->default(Categories::first()),
+                    ->default(Category::first()),
                 Forms\Components\Select::make('quality_id')
                     ->relationship('quality', 'value')
-                    ->default(Qualities::first()),
+                    ->default(Quality::first()),
                 Forms\Components\FileUpload::make('photo_url')
                     ->required(),
             ]);
