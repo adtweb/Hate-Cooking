@@ -31,6 +31,12 @@ class RecipeResource extends Resource
                     ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'value')
+                    ->default(Categiry::first()),
+                Forms\Components\Select::make('quality_id')
+                    ->relationship('quality', 'value')
+                    ->default(Categiry::first()),
                 Forms\Components\FileUpload::make('photo_url')
                     ->required(),
             ]);
