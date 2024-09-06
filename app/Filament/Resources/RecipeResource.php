@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\Recipe;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,7 +24,19 @@ class RecipeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('value')
+                    ->maxLength(255)
+                    ->required(),
+                Forms\Components\TextInput::make('slug')
+                    ->maxLength(255)
+                    ->required(),
+                Forms\Components\Select::make('category_id')
+                    ->relationship('category', 'value'),
+                Forms\Components\Select::make('quality_id')
+                    ->relationship('quality', 'value')
+                    ->required(),
+                Forms\Components\FileUpload::make('photo_url')
+                    ->required(),
             ]);
     }
 
@@ -31,10 +44,14 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('photo_url'),
+                Tables\Columns\TextColumn::make('value'),
+                Tables\Columns\TextColumn::make('user.email'),
+                Tables\Columns\TextColumn::make('updated_at'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('user_id')
+                    ->options(User::all()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
