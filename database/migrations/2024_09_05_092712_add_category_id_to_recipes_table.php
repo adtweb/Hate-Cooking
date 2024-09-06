@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('recipes', function (Blueprint $table) {
             $table->foreignUuid('category_id')->after('user_id')->nullable()
-                ->constrained('categories', 'id')->nullOnDelete();
+                ->constrained('recipe_category', 'category_id')->nullOnDelete();
             $table->foreignUuid('quality_id')->after('category_id')->nullable()
-                ->constrained('qualities', 'id')->nullOnDelete();
+                ->constrained('recipe_quality', 'quality_id')->nullOnDelete();
         });
     }
 
