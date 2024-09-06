@@ -54,7 +54,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email_verified_at'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('role_id')
+                    ->options(Role::all()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
