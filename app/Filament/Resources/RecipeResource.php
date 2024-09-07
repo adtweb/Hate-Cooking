@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RecipeResource\Pages;
+use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\Recipe;
 use App\Models\User;
 use Filament\Forms;
@@ -64,7 +65,7 @@ class RecipeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('photo_url'),
                 Tables\Columns\TextColumn::make('value')->label('Название'),
-                Tables\Columns\TextColumn::make('user.email')->label('Автор'),
+                Tables\Columns\TextColumn::make('user.email')->label('Автор')->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Дата модификации'),
             ])
             ->filters([
@@ -84,7 +85,7 @@ class RecipeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\StepsRelationManager::class,
         ];
     }
 
