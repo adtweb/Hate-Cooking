@@ -16,6 +16,8 @@ class Ingredient extends Model
     use HasUuids;
     use Notifiable;
 
+    protected $fillable = ['value', 'quantity'];
+
     public function recipe(): BelongsTo
     {
         return $this->belongsTo(Recipe::class);
