@@ -18,7 +18,9 @@ class StepsRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('photo_url')->label('Фотография'),
                 Forms\Components\TextInput::make('description')
+                    ->label('Описание')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -29,7 +31,8 @@ class StepsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('photo_url')->label('Фотография'),
+                Tables\Columns\TextColumn::make('description')->label('Описание'),
             ])
             ->filters([
                 //
