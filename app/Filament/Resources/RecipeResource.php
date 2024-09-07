@@ -24,10 +24,14 @@ class RecipeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('value')
+                    ->minLength(3)
                     ->maxLength(255)
                     ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                Forms\Components\TextInput::make('slug')
+                    ->maxLength(255)
+                    ->required(),
                 Forms\Components\Select::make('user_id')
                     ->label('Автор')
                     ->options(User::all()->pluck('name', 'id'))
