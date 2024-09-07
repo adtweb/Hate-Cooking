@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Category extends Model
@@ -21,8 +21,8 @@ class Category extends Model
     /**
      * Get the recipes for the categories.
      */
-    public function recipes(): BelongsToMany
+    public function recipes(): HasMany
     {
-        return $this->belongsToMany(Recipe::class);
+        return $this->HasMany(Recipe::class);
     }
 }
