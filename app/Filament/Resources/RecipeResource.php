@@ -31,7 +31,8 @@ class RecipeResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->label('Автор')
                     ->options(User::all()->pluck('name', 'id'))
-                    ->searchable(),
+                    ->searchable()
+                    ->required(),
                 Forms\Components\CheckboxList::make('categories')
                     ->relationship(titleAttribute: 'value')
                     ->columns(2)
