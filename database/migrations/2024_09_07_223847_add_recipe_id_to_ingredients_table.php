@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ingredients', function (Blueprint $table) {
-            //
+            $table->foreignUuid('recipe_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('ingredients', function (Blueprint $table) {
-            //
+            $table->dropForeign('recipe_id');
         });
     }
 };

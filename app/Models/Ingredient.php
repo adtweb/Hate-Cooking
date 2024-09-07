@@ -16,7 +16,7 @@ class Ingredient extends Model
     use HasUuids;
     use Notifiable;
 
-    public function recipes(): BelongsTo
+    public function recipe(): BelongsTo
     {
         return $this->belongsTo(Recipe::class);
     }
