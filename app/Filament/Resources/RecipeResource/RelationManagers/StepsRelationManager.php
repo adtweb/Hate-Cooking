@@ -14,6 +14,8 @@ class StepsRelationManager extends RelationManager
 {
     protected static string $relationship = 'steps';
 
+    protected static ?string $pluralModelLabel = 'По шагам';
+
     public function form(Form $form): Form
     {
         return $form

@@ -14,11 +14,18 @@ class IngredientsRelationManager extends RelationManager
 {
     protected static string $relationship = 'ingredients';
 
+    protected static ?string $pluralModelLabel = 'Ингредиенты';
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('value')
+                    ->label('Ингредиент')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('quantity')
+                    ->label('Количество')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -29,7 +36,8 @@ class IngredientsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('value')
             ->columns([
-                Tables\Columns\TextColumn::make('value'),
+                Tables\Columns\TextColumn::make('value')->label('Ингредиент'),
+                Tables\Columns\TextColumn::make('quantity')->label('Количество'),
             ])
             ->filters([
                 //
