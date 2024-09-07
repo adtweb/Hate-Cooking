@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('ingredients', function (Blueprint $table) {
+            $table->dropColumn('slug');
+            $table->dropForeign('product_id');
+            $table->dropForeign('measure_id');
+            $table->string('measure');
+        });
+        Schema::dropIfExists('measures');
+        Schema::dropIfExists('products');
     }
 
     /**
@@ -19,6 +26,27 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::create('products', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('value');
+            $table->string('slug');
+            $table->string('image_url');
+            $table->timestamps();
+        });
+
+        Schema::create('measures', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('value');
+            $table->string('slug');
+            $table->string('image_url');
+            $table->timestamps();
+        });
+
+        Schema::create('ingredients', function (Blueprint $table) {
+            $table->string('slug')->after('value');
+            $table->float('quantity');
+            $table->foreignUuid('product_id')->cascadeOnDelete();
+            $table->foreignUuid('measure_id')->cascadeOnDelete();;
+        });
     }
 };

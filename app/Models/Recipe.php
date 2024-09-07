@@ -63,4 +63,9 @@ class Recipe extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function ingredients(): HasMany
+    {
+        return $this->hasMany(Ingredient::class);
+    }
 }
