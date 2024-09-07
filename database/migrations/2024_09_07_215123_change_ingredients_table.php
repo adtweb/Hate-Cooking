@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::table('ingredients', function (Blueprint $table) {
             $table->dropColumn('slug');
-            $table->dropForeign('product_id');
-            $table->dropForeign('measure_id');
-            $table->string('measure');
+            $table->dropColumn('product_id');
+            $table->dropColumn('measure_id');
         });
         Schema::dropIfExists('measures');
         Schema::dropIfExists('products');
@@ -44,7 +43,6 @@ return new class extends Migration
 
         Schema::table('ingredients', function (Blueprint $table) {
             $table->string('slug')->after('value');
-            $table->dropColumn('measure');
             $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('measure_id')->constrained()->cascadeOnDelete();;
         });
