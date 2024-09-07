@@ -55,10 +55,11 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Имя')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')->searchable(),
-                Tables\Columns\TextColumn::make('role.name'),
-                Tables\Columns\TextColumn::make('email_verified_at'),
+                Tables\Columns\TextColumn::make('role.name')->label('Уровень доступа'),
+                Tables\Columns\TextColumn::make('email_verified_at')->label('Дата активации'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('role_id')

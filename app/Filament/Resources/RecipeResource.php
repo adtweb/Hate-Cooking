@@ -63,9 +63,9 @@ class RecipeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('photo_url'),
-                Tables\Columns\TextColumn::make('value'),
-                Tables\Columns\TextColumn::make('user.email'),
-                Tables\Columns\TextColumn::make('updated_at'),
+                Tables\Columns\TextColumn::make('value')->label('Название'),
+                Tables\Columns\TextColumn::make('user.email')->label('Автор'),
+                Tables\Columns\TextColumn::make('updated_at')->label('Дата модификации'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('user_id')
