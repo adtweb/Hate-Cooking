@@ -57,6 +57,7 @@ class RecipeResource extends Resource
                     ->label('Фотография')
                     ->directory('photos')
                     ->image()
+                    ->visibility('public')
                     ->required(),
             ]);
     }
