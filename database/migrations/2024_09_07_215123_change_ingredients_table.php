@@ -15,6 +15,7 @@ return new class extends Migration
             $table->dropColumn('slug');
             $table->dropColumn('product_id');
             $table->dropColumn('measure_id');
+            $table->string('quantity')->change();
         });
         Schema::dropIfExists('measures');
         Schema::dropIfExists('products');
@@ -43,6 +44,7 @@ return new class extends Migration
 
         Schema::table('ingredients', function (Blueprint $table) {
             $table->string('slug')->after('value');
+            $table->float('quantity')->change();
             $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('measure_id')->constrained()->cascadeOnDelete();;
         });
