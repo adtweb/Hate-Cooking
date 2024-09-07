@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ingredients', function (Blueprint $table) {
+        Schema::table('ingredients', function (Blueprint $table) {
             $table->dropColumn('slug');
             $table->dropForeign('product_id');
             $table->dropForeign('measure_id');
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ingredients', function (Blueprint $table) {
+        Schema::table('ingredients', function (Blueprint $table) {
             $table->string('slug')->after('value');
             $table->float('quantity');
             $table->foreignUuid('product_id')->cascadeOnDelete();
