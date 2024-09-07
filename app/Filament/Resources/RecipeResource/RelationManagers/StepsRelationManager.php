@@ -37,7 +37,7 @@ class StepsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
-                Tables\Columns\TextColumn::make('photo_url')->label('Фотография'),
+                Tables\Columns\ImageColumn::make('photo_url')->label('Фотография'),
                 Tables\Columns\TextColumn::make('description')->label('Описание'),
             ])
             ->filters([

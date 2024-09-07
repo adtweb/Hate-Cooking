@@ -66,7 +66,7 @@ class RecipeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('thumbnail')->collection('photo_url'),
+                Tables\Columns\ImageColumn::make('photo_url')->label('Фотография'),
                 Tables\Columns\TextColumn::make('value')->label('Название'),
                 Tables\Columns\TextColumn::make('user.email')->label('Автор')->searchable(),
                 Tables\Columns\TextColumn::make('updated_at')->label('Дата модификации'),
