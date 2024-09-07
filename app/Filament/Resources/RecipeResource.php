@@ -31,12 +31,18 @@ class RecipeResource extends Resource
                     ->required()
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'value')
-                    ->default(null),
-                Forms\Components\Select::make('quality_id')
-                    ->relationship('quality', 'value')
-                    ->default(null),
+                Forms\Components\Select::make('user_id')
+                    ->label('Автор')
+                    ->options(User::all()->pluck('name', 'id'))
+                    ->searchable(),
+                Forms\Components\CheckboxList::make('categories')
+                    ->relationship(titleAttribute: 'value')
+                    ->columns(2)
+                    ->gridDirection('row'),
+                Forms\Components\CheckboxList::make('qualities')
+                    ->relationship(titleAttribute: 'value')
+                    ->columns(2)
+                    ->gridDirection('row'),
                 Forms\Components\FileUpload::make('photo_url')
                     ->required(),
             ]);
