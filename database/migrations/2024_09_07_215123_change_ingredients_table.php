@@ -44,9 +44,9 @@ return new class extends Migration
 
         Schema::table('ingredients', function (Blueprint $table) {
             $table->string('slug')->after('value');
-            $table->float('quantity');
-            $table->foreignUuid('product_id')->cascadeOnDelete();
-            $table->foreignUuid('measure_id')->cascadeOnDelete();;
+            $table->dropColumn('measure');
+            $table->foreignUuid('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('measure_id')->constrained()->cascadeOnDelete();;
         });
     }
 };
