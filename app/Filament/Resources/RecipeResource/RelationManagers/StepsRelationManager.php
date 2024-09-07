@@ -20,11 +20,15 @@ class StepsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('photo_url')->label('Фотография'),
+                Forms\Components\FileUpload::make('photo_url')
+                    ->label('Фотография')
+                    ->directory('photos')
+                    ->image(),
                 Forms\Components\TextInput::make('description')
                     ->label('Описание')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpan('full'),
             ]);
     }
 

@@ -55,6 +55,8 @@ class RecipeResource extends Resource
                     ->gridDirection('row'),
                 Forms\Components\FileUpload::make('photo_url')
                     ->label('Фотография')
+                    ->directory('photos')
+                    ->image()
                     ->required(),
             ]);
     }
