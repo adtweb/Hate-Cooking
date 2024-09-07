@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ingredients', function (Blueprint $table) {
-            $table->dropColumn('slug');
             $table->dropColumn('product_id');
             $table->dropColumn('measure_id');
             $table->string('quantity')->change();
