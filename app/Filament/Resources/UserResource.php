@@ -29,18 +29,22 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Имя')
                     ->maxLength(255)
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email(255)
                     ->required(),
                 Forms\Components\DatePicker::make('email_verified_at')
+                    ->label('Дата активации')
                     ->maxDate(now()),
                 Forms\Components\TextInput::make('password')
+                    ->label('Пароль')
                     ->password(255)
                     ->revealable()
                     ->autocomplete(false),
                 Forms\Components\Select::make('role_id')
+                    ->label('Уровень доступа')
                     ->relationship('role', 'name')
                     ->required(),
             ]);

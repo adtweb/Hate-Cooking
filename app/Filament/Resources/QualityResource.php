@@ -30,6 +30,7 @@ class QualityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('value')
+                    ->label('Название')
                     ->maxLength(255)
                     ->required()
                     ->live(onBlur: true)

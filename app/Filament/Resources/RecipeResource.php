@@ -28,6 +28,7 @@ class RecipeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('value')
+                    ->label('Название')
                     ->minLength(3)
                     ->maxLength(255)
                     ->required()
@@ -42,14 +43,17 @@ class RecipeResource extends Resource
                     ->searchable()
                     ->required(),
                 Forms\Components\CheckboxList::make('categories')
+                    ->label('Категории')
                     ->relationship(titleAttribute: 'value')
                     ->columns(2)
                     ->gridDirection('row'),
                 Forms\Components\CheckboxList::make('qualities')
+                    ->label('Свойства')
                     ->relationship(titleAttribute: 'value')
                     ->columns(2)
                     ->gridDirection('row'),
                 Forms\Components\FileUpload::make('photo_url')
+                    ->label('Фотография')
                     ->required(),
             ]);
     }
