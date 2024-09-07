@@ -43,17 +43,17 @@ class Recipe extends Model
     /**
      * Get the categories for the recipe.
      */
-    public function categories(): BelongsToMany
+    public function categories(): HasMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->hasMany(Category::class);
     }
 
     /**
      * Get the qualities for the recipe.
      */
-    public function qualities(): BelongsToMany
+    public function qualities(): HasMany
     {
-        return $this->belongsToMany(Quality::class);
+        return $this->hasMany(Quality::class);
     }
 
     /**
