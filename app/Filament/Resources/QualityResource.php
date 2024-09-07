@@ -19,7 +19,11 @@ class QualityResource extends Resource
 {
     protected static ?string $model = Quality::class;
 
+    protected static ?string $pluralModelLabel = 'Свойства';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Свойства';
 
     public static function form(Form $form): Form
     {
