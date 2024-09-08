@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->resource('recipes', RecipeController::class);
+Route::resource('recipes', RecipeController::class);
 Route::middleware('auth')->resource('recipes', IngredientController::class);
 Route::middleware('auth')->resource('recipes', StepController::class);
 
