@@ -7,7 +7,7 @@
             </span>
         </div>
         <div>
-            <img src="{{ $recipe->photo_url }}">
+            <img src="{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
         </div>
         <div>
             {{ $recipe->description }}
