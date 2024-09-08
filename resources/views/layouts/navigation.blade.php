@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('recipes') }}">
+                    <a href="{{ route('/') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('recipes')" :active="request()->routeIs('recipes')">
+                    <x-nav-link :href="route('/')" :active="request()->routeIs('/')">
                         {{ __('Новые рецепты') }}
                     </x-nav-link>
                 </div>
@@ -36,7 +36,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Личный кабинет') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -46,7 +46,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Выйти') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
