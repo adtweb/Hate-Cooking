@@ -21,7 +21,10 @@
         <h2 class="text-2xl font-semibold">Приготовление</h2>
         <ul>
             @foreach($steps as $step)
-            <li class="!bg-none border-bottom">{{ $step->html }}</li>
+            <li class="!bg-none border-bottom">
+                <img src="{{ $step->photo_url }}" />
+                {{ $step->html }}
+            </li>
             @endforeach
         </ul>
     </div>
