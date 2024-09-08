@@ -1,7 +1,7 @@
 <x-app-layout>
     <div>
         <ul>
-            @foreach($resipes as $recipe)
+            @foreach($recipes as $recipe)
                 <a href="{{ route('recipes.index', $recipe) }}">
                     <img src="{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
                     {{ $recipe->value }}
