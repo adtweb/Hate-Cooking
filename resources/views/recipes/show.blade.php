@@ -12,5 +12,17 @@
         <div>
             {!! $recipe->html !!}
         </div>
+        <h2 class="text-2xl font-semibold">Ингредиенты</h2>
+        <table>
+            @foreach($ingredients as $ingredient)
+            <tr class="!bg-none border-bottom"><td>{{ $ingredient->value }}</td><td class="align-content-end">{{ $ingredient->quantity }}</td></tr>
+            @endforeach
+        </table>
+        <h2 class="text-2xl font-semibold">Приготовление</h2>
+        <ul>
+            @foreach($steps as $step)
+            <li class="!bg-none border-bottom">{{ $step->html }}</li>
+            @endforeach
+        </ul>
     </div>
 </x-app-layout>

@@ -35,4 +35,9 @@ class Step extends Model
     {
         return $this->belongsTo(Recipe::class, 'recipe_id');
     }
+
+    public function html(): \Attribute
+    {
+        return \Attribute::get(fn () => str($this->description)->markdown());
+    }
 }
