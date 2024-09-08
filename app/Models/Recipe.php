@@ -74,4 +74,8 @@ class Recipe extends Model
     {
         return $this->hasMany(Ingredient::class);
     }
+    public function html(): \Attribute
+    {
+        return \Attribute::get(fn () => str($this->description)->markdown());
+    }
 }

@@ -10,7 +10,7 @@
             <img src="{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
         </div>
         <div>
-            {{ $recipe->description }}
+            {!! $recipe->html !!}
         </div>
     </div>
 </x-app-layout>
