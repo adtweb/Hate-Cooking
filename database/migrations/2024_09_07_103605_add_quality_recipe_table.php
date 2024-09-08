@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recipe_quality', function (Blueprint $table) {
+        Schema::create('quality_recipe', function (Blueprint $table) {
             $table->foreignUuid('recipe_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('quality_id')->constrained()->cascadeOnDelete();
         });
@@ -22,10 +22,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('recipe_quality', function (Blueprint $table): void {
+        Schema::table('quality_recipe', function (Blueprint $table): void {
             $table->dropForeign(['recipe_id']);
             $table->dropForeign(['quality_id']);
         });
-        Schema::dropIfExists('recipe_quality');
+        Schema::dropIfExists('quality_recipe');
     }
 };

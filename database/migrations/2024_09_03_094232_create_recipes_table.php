@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('value');
             $table->string('slug')->unique();
-            $table->foreignUuid('user_id')->index()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->index()->constrained()->cascadeOnDelete();
             $table->string('photo_url');
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('photo_url');
             $table->text('description');
-            $table->foreignUuid('recipe_id')->constrained('recipes')->cascadeOnDelete();
+            $table->foreignUuid('recipe_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -34,7 +34,13 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('steps', function (Blueprint $table) {
+            $table->dropForeign('recipe_id');
+        });
         Schema::dropIfExists('steps');
+        Schema::table('recipes', function (Blueprint $table) {
+            $table->dropForeign('user_id');
+        });
         Schema::dropIfExists('recipes');
     }
 };

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('value');
-            $table->string('slug')->unique();
-            $table->timestamps();
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->foreignUuid('recipe_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->dropForeign('recipe_id');
+        });
     }
 };
