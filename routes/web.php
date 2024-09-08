@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\StepController;
-use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
@@ -19,9 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('recipes', RecipeController::class);
-Route::middleware('auth')->resource('recipes.ingredients', IngredientController::class);
-Route::middleware('auth')->resource('recipes.steps', StepController::class);
+Route::resources([
+    'recipes', RecipeController::class,
+    'recipes.ingredients', IngredientController::class,
+    'recipes.steps', StepController::class,
+    ]);
+Route::middleware('auth')->resource('recipes.comments', CommentController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
