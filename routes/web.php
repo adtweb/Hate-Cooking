@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource('recipes', RecipeController::class);
-Route::middleware('auth')->resource('recipes', IngredientController::class);
-Route::middleware('auth')->resource('recipes', StepController::class);
+Route::middleware('auth')->resource('recipes.ingredients', IngredientController::class);
+Route::middleware('auth')->resource('recipes.steps', StepController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
