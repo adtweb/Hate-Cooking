@@ -2,7 +2,7 @@
     <div>
         <ul>
             @foreach($recipes as $recipe)
-                <a href="{{ route('recipes.index', $recipe) }}">
+                <a href="{{ route('recipes.show', $recipe) }}">
                     <img src="{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
                     {{ $recipe->value }}
                 </a>
