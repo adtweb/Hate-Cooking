@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
@@ -16,7 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', ['header' => 'Новые рецепты']);
+Route::get('/', [HomeController::class, 'welcome']);
 
 Route::resource('recipes', RecipeController::class);
 Route::resource('recipes.ingredients', IngredientController::class);
