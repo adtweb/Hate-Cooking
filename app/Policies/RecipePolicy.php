@@ -8,12 +8,21 @@ use Illuminate\Auth\Access\Response;
 
 class RecipePolicy
 {
+    public function before(User $user): bool|null
+    {
+        if ($user->isAdministrator() || $user->isModerator()) {
+            return true;
+        }
+
+        return null;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,15 +30,15 @@ class RecipePolicy
      */
     public function view(User $user, Recipe $recipe): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(?User $user): bool
     {
-        //
+        return !is_null($user);
     }
 
     /**
@@ -37,7 +46,7 @@ class RecipePolicy
      */
     public function update(User $user, Recipe $recipe): bool
     {
-        //
+        return $user->id === $recipe->user_id;
     }
 
     /**
@@ -45,7 +54,7 @@ class RecipePolicy
      */
     public function delete(User $user, Recipe $recipe): bool
     {
-        //
+        return $user->id === $recipe->user_id;
     }
 
     /**
@@ -53,7 +62,7 @@ class RecipePolicy
      */
     public function restore(User $user, Recipe $recipe): bool
     {
-        //
+        return $user->id === $recipe->user_id;
     }
 
     /**
@@ -61,6 +70,6 @@ class RecipePolicy
      */
     public function forceDelete(User $user, Recipe $recipe): bool
     {
-        //
+        return $user->id === $recipe->user_id;
     }
 }
