@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\recipe;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -25,15 +27,19 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Recipe $recipe)
     {
-        //
+        $data = $request->validate(['body' => ['required', 'string', 'max:255']]);
+
+        $recipe->comments()->create([...$data, 'user_id' => $request->user()->id]);
+
+        return to_route('recipes.show', $recipe)->withFragment('comments');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Comment $comment)
     {
         //
     }
@@ -41,7 +47,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -49,7 +55,7 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -57,8 +63,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Recipe $recipe, Comment $comment)
     {
-        //
+        $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return to_route('recipes.show', $recipe)->withFragment('comments');
     }
 }
