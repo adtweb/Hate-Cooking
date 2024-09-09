@@ -41,6 +41,8 @@ class RecipeController extends Controller
     {
         return view('recipes.show', [
             'recipe' => $recipe,
+            'categories' => $recipe->categories(),
+            'qualities' => $recipe->qualities(),
             'ingredients' => $recipe->ingredients(),
             'steps' => $recipe->steps(),
 //            'comments' => $recipe->comments()->with('user')->paginate(10),

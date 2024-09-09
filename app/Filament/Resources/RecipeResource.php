@@ -59,6 +59,8 @@ class RecipeResource extends Resource
                     ->image()
                     ->visibility('public')
                     ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->label('Описание'),
             ]);
     }
 

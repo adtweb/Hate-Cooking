@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\StepController;
-use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
@@ -15,9 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::resource('recipes', RecipeController::class);
 Route::resource('recipes.ingredients', IngredientController::class);

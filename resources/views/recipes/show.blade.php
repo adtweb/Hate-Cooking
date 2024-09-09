@@ -23,7 +23,7 @@
             @foreach($steps as $step)
             <li class="!bg-none border-bottom">
                 <img src="{{ $step->photo_url }}" />
-                {{ $step->html }}
+                {{ $step->description }}
             </li>
             @endforeach
         </ul>
