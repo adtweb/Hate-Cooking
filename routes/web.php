@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::resource('recipes', RecipeController::class);
+Route::resource('recipes', RecipeController::class)->name('show', 'recipes');
 Route::resource('recipes.ingredients', IngredientController::class);
 Route::resource('recipes.steps', StepController::class);
 Route::middleware('auth')->resource('recipes.comments', CommentController::class);
