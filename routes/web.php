@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/', [RecipeController::class, 'index']);
+Route::get('/', ['header' => 'Новые рецепты']);
 
 Route::resource('recipes', RecipeController::class);
 Route::resource('recipes.ingredients', IngredientController::class);
