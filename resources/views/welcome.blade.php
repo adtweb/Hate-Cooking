@@ -20,9 +20,11 @@
                         </div>
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end">
-                                <x-responsive-nav-link :href="route('recipes')" :active="request()->routeIs('recipes')">
-                                    Рекомендуем
-                                </x-responsive-nav-link>
+                                @if (Route::has('recipes'))
+                                    <x-responsive-nav-link :href="route('recipes')" :active="request()->routeIs('recipes')">
+                                        Рекомендуем
+                                    </x-responsive-nav-link>
+                                @endif
                                 @auth
                                 @else
                                     <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
