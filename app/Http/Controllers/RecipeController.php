@@ -13,7 +13,7 @@ class RecipeController extends Controller
     public function index()
     {
         return view('recipes.index', [
-            'recipes' => Recipe::latest()->with('user')->paginate(10),
+            'recipes' => Recipe::latest()->with('user')->with('categories')->with('qualities')->paginate(10),
         ]);
     }
 
@@ -40,6 +40,10 @@ class RecipeController extends Controller
     {
         return view('recipes.show', [
             'recipe' => $recipe,
+            'qualities' => $recipe->qualities(),
+            'categories' => $recipe->categories(),
+            'ingredients' => $recipe->ingredients(),
+            'steps' => $recipe->steps(),
             'comments' => $recipe->comments()->latest()->with('user')->paginate(10),
         ]);
     }

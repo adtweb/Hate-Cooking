@@ -3,9 +3,10 @@
         <ul class="divide-y">
             @foreach($recipes as $recipe)
                 <li class="py-4 px-2">
-                    <a href="{{ route('recipes.show', $recipe) }}" class="text-xl font-semibold block">{{ $recipe->title }}</a>
+                    <img src="{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
+                    <a href="{{ route('recipes.show', $recipe) }}" class="text-xl font-semibold block">{{ $recipe->value }}</a>
                     <span class="text-sm text-gray-600">
-                        {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
+                        {{ $recipe->created_at->diffForHumans() }} от {{ $recipe->user->name }}
                     </span>
                 </li>
             @endforeach
