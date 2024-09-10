@@ -13,7 +13,7 @@
                             <div class="col">{{ $quality->value }}</div>
                         @endforeach
                     </div>
-                    <div>{!! $recipe->html() !!}</div>
+                    <div>{!! $recipe->html !!}</div>
                     <span class="text-sm text-gray-600">
                         {{ $recipe->created_at->diffForHumans() }} от {{ $recipe->user->name }}
                     </span>
