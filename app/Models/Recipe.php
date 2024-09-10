@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -76,8 +77,8 @@ class Recipe extends Model
         return $this->hasMany(Ingredient::class);
     }
 
-    public function html(): \Attribute
+    public function html(): Attribute
     {
-        return \Attribute::get(fn () => str($this->description)->markdown());
+        return Attribute::get(fn () => str($this->description)->markdown());
     }
 }
