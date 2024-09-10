@@ -53,7 +53,7 @@
                 <form action="{{ route('recipes.comments.store', $recipe) }}" method="POST" class="mt-2">
                     @csrf
 
-                    <textarea name="description" id="description" cols="30" rows="5" class="w-full"></textarea>
+                    <textarea name="comment" id="comment" cols="30" rows="5" class="w-full"></textarea>
                     <x-primary-button type="submit">Добавить отзыв</x-primary-button>
                 </form>
             @endauth
@@ -61,7 +61,7 @@
             <ul class="divide-y mt-4">
                 @foreach($recipe->comments as $comment)
                     <li class="py-4 px-2">
-                        <p>{{ $comment->body }}</p>
+                        <p>{!! $comment->comment !!}</p>
                         <span class="text-sm text-gray-600">
                             {{ $comment->created_at->diffForHumans() }} by {{ $comment->user->name }}
                         </span>
