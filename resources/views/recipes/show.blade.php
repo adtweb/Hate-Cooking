@@ -22,6 +22,15 @@
             {!! $recipe->html !!}
         </div>
 
+        @can('update', $recipe)
+            <a
+                href="{{ route('recipes.update', ['recipe' => $recipe]) }}"
+                class="mt-2">
+
+                Изменить
+            </a>
+        @endcan
+
         @can('delete', $recipe)
             <form
                 action="{{ route('recipes.destroy', ['recipe' => $recipe]) }}"

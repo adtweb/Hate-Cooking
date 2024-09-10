@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RecipeController extends Controller
 {
@@ -69,6 +70,10 @@ class RecipeController extends Controller
      */
     public function destroy(recipe $recipe)
     {
-        //
+        Gate::authorize('delete', $recipe);
+
+        $recipe->delete();
+
+        return to_route('recipes.index');
     }
 }
