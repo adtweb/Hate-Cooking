@@ -50,7 +50,7 @@
             <h2 id="comments" class="text-2xl font-semibold">Отзывы</h2>
 
             @auth
-                <form action="{{ route('recipes.comments.store', $recipe) }}" method="recipe" class="mt-2">
+                <form action="{{ route('recipes.comments.store', $recipe) }}" method="POST" class="mt-2">
                     @csrf
 
                     <textarea name="description" id="description" cols="30" rows="5" class="w-full"></textarea>
@@ -69,7 +69,7 @@
                         @can('delete', $comment)
                             <form
                                 action="{{ route('recipes.comments.destroy', ['recipe' => $recipe, 'comment' => $comment]) }}"
-                                method="recipe" class="mt-2">
+                                method="POST" class="mt-2">
                                 @csrf
                                 @method('DELETE')
 
