@@ -33,6 +33,7 @@ class Recipe extends Model
         'category_id',
         'quality_id',
         'photo_url',
+        'description',
     ];
 
     public function user(): BelongsTo
