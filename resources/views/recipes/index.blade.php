@@ -7,7 +7,7 @@
                     <a href="{{ route('recipes.show', $recipe) }}"><h2>{{ $recipe->value }}</h2></a>
                     <div class="row">
                         <div class="col">Категории:</div>
-                        @foreach($recipy->categories as $category)
+                        @foreach($recipe->categories as $category)
                             <div class="col">{{ $category->value }}</div>
                         @endforeach
                     </div>
