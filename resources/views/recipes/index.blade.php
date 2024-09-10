@@ -6,12 +6,14 @@
                     <a href="{{ route('recipes.show', $recipe) }}"><img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" /></a>
                     <a href="{{ route('recipes.show', $recipe) }}"><h2>{{ $recipe->value }}</h2></a>
                     <div class="row">
-                        <div class="col">Категории:</div>
                         @foreach($recipe->categories as $category)
                             <div class="col">{{ $category->value }}</div>
                         @endforeach
+                        @foreach($recipe->qualities as $quality)
+                            <div class="col">{{ $quality->value }}</div>
+                        @endforeach
                     </div>
-                    <div>{{ $recipe->description }}</div>
+                    <div>{{ $recipe->html() }}</div>
                     <span class="text-sm text-gray-600">
                         {{ $recipe->created_at->diffForHumans() }} от {{ $recipe->user->name }}
                     </span>
