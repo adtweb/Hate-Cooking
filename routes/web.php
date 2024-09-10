@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('recipes.index');
+})->resource('recipes')->name('recipes');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
