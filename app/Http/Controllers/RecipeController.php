@@ -23,7 +23,7 @@ class RecipeController extends Controller
      */
     public function create()
     {
-        //
+        return view('recipes.create');
     }
 
     /**
@@ -33,11 +33,15 @@ class RecipeController extends Controller
     {
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
+            'photo_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required',
         ]);
 
-        $this->create([...$data, 'user_id' => $request->user()->id]);
+        $recipe = new Recipe();
 
-        return to_route('recipes.update', $this);
+        $recipe->create([...$data, 'user_id' => $request->user()->id]);
+
+        return to_route('recipes.update', $recipe);
     }
 
     /**
@@ -60,7 +64,7 @@ class RecipeController extends Controller
      */
     public function edit(recipe $recipe)
     {
-        //
+        return view('recipes.update');
     }
 
     /**
@@ -70,7 +74,13 @@ class RecipeController extends Controller
     {
         Gate::authorize('update', $recipe);
 
-        $recipe->update();
+        $data = $request->validate([
+            'value' => ['required', 'string', 'max:255'],
+            'photo_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required',
+        ]);
+
+        $recipe->update([...$data]);
 
         return to_route('recipes.show', $recipe);
     }
