@@ -80,6 +80,6 @@ class Recipe extends Model
 
     public function html(): Attribute
     {
-        return Attribute::get(fn () => str($this->description)->markdown());
+        return Attribute::get(fn () => str($this->body)->markdown());
     }
 }
