@@ -35,7 +35,7 @@
             <div class="row">
                 @foreach($recipe->steps as $step)
                     <div class="col bg-light border-bottom">
-                        <img src="/storage/{{ $step->photo_url }}" alt="{{ ++$i }}" />
+                        <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
                         {{ $step->html }}
                     </div>
                 @endforeach

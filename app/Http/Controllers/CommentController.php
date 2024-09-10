@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\recipe;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
 {
