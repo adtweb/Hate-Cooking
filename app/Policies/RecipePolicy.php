@@ -46,7 +46,8 @@ class RecipePolicy
      */
     public function update(User $user, Recipe $recipe): bool
     {
-        return $user->id === $recipe->user_id;
+        return true;
+//        return $user->id === $recipe->user_id;
     }
 
     /**
