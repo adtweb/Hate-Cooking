@@ -13,7 +13,7 @@ class RecipeController extends Controller
     public function index()
     {
         return view('recipes.index', [
-            'recipes' => Recipe::latest()->with('user')->with('categories')->with('qualities')->paginate(10),
+            'recipes' => Recipe::latest()->with('user')->with('category')->with('quality')->paginate(10),
         ]);
     }
 
