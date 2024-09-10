@@ -41,7 +41,7 @@ class RecipeController extends Controller
 
         $recipe->create([...$data, 'user_id' => $request->user()->id]);
 
-        return to_route('recipes.update', $recipe);
+        return to_route('recipes.edit', $recipe);
     }
 
     /**
@@ -64,7 +64,7 @@ class RecipeController extends Controller
      */
     public function edit(recipe $recipe)
     {
-        return view('recipes.update');
+        return view('recipes.edit');
     }
 
     /**
