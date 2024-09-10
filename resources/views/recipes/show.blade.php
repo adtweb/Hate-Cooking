@@ -1,9 +1,14 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-2 py-6">
         <div>
-            <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
-            <h1 class="text-3xl font-semibold">{{ $recipe->value }}</h1>
+            <h1 class="text-3xl font-semibold m-5">{{ $recipe->value }}</h1>
             <div class="row">
+                <span class="text-sm text-gray-600">
+                    {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
+                </span>
+            </div>
+            <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
+            <div class="row p-5">
                 @foreach($recipe->categories as $category)
                     <div class="col"><span class="bg-light p-3">{{ $category->value }}</span></div>
                 @endforeach
@@ -11,14 +16,9 @@
                     <div class="col"><span class="bg-info p-3">{{ $quality->value }}</span></div>
                 @endforeach
             </div>
-            <div class="row">
-                <span class="text-sm text-gray-600">
-                    {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
-                </span>
-            </div>
         </div>
 
-        <div class="prose mt-6">
+        <div class="prose mt-5">
             {!! $recipe->html !!}
         </div>
 
