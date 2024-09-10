@@ -11,9 +11,11 @@
                     <div class="col"><span class="bg-info p-3">{{ $quality->value }}</span></div>
                 @endforeach
             </div>
-            <span class="text-sm text-gray-600">
-                {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
-            </span>
+            <div class="row">
+                <span class="text-sm text-gray-600">
+                    {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
+                </span>
+            </div>
         </div>
 
         <div class="prose mt-6">
@@ -25,7 +27,7 @@
                 @foreach($recipe->ingredients as $ingredient)
                     <div class="row">
                         <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
-                        <div class="col bg-light border-bottom">{{ $ingredient->quantity }}</div>
+                        <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
                     </div>
                 @endforeach
         </div>
@@ -36,7 +38,9 @@
                     <div class="row">
                         <div class="col bg-light border-bottom">
                             <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
-                            {{ $step->html }}
+                        </div>
+                        <div class="col bg-light border-bottom">
+                            {!! $step->html !!}
                         </div>
                     </div>
                 @endforeach
