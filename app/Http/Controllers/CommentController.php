@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\recipe;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
