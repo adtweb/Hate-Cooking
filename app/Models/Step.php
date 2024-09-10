@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Notifications\Notifiable;
 
 class Step extends Model
@@ -36,8 +37,8 @@ class Step extends Model
         return $this->belongsTo(Recipe::class, 'recipe_id');
     }
 
-    public function html(): \Attribute
+    public function html(): Attribute
     {
-        return \Attribute::get(fn () => str($this->description)->markdown());
+        return Attribute::get(fn () => str($this->description)->markdown());
     }
 }
