@@ -56,6 +56,10 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+            @else
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                    <a href="{{ route('login') }}">Войти</a>
+                </div>
             @endauth
 
             <!-- Hamburger -->
