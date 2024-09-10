@@ -17,7 +17,7 @@ class Comment extends Model
     use HasUuids;
     use Notifiable;
 
-    protected $fillable = ['comment', 'iser_id'];
+    protected $fillable = ['comment', 'user_id'];
 
     public function recipe(): BelongsTo
     {
