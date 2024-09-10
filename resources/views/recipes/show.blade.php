@@ -22,6 +22,17 @@
             {!! $recipe->html !!}
         </div>
 
+        @can('delete', $recipe)
+            <form
+                action="{{ route('recipes.destroy', ['recipe' => $recipe]) }}"
+                method="POST" class="mt-2">
+                @csrf
+                @method('DELETE')
+
+                <x-danger-button type="submit">Удалить</x-danger-button>
+            </form>
+        @endcan
+
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
                 @foreach($recipe->ingredients as $ingredient)
