@@ -39,4 +39,4 @@ Route::resource('recipes.ingredients', IngredientController::class);
 Route::resource('recipes.steps', StepController::class);
 Route::middleware('auth')->resource('recipes.comments', CommentController::class);
 
-Route::redirect('/', '/recipe');
+Route::redirect('/', '/recipes');
