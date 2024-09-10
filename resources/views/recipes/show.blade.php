@@ -5,10 +5,10 @@
             <h1 class="text-3xl font-semibold">{{ $recipe->value }}</h1>
             <div class="row">
                 @foreach($recipe->categories as $category)
-                    <div class="col bg-light">{{ $category->value }}</div>
+                    <div class="col"><span class="bg-light p-3">{{ $category->value }}</span></div>
                 @endforeach
                 @foreach($recipe->qualities as $quality)
-                    <div class="col bg-info">{{ $quality->value }}</div>
+                    <div class="col"><span class="bg-info p-3">{{ $quality->value }}</span></div>
                 @endforeach
             </div>
             <span class="text-sm text-gray-600">
@@ -22,24 +22,24 @@
 
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
-            <div class="row">
                 @foreach($recipe->ingredients as $ingredient)
-                    <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
-                    <div class="col bg-light border-bottom">{{ $ingredient->quantity }}</div>
+                    <div class="row">
+                        <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
+                        <div class="col bg-light border-bottom">{{ $ingredient->quantity }}</div>
+                    </div>
                 @endforeach
-            </div>
         </div>
 
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold">Приготовление</h2>
-            <div class="row">
                 @foreach($recipe->steps as $step)
-                    <div class="col bg-light border-bottom">
-                        <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
-                        {{ $step->html }}
+                    <div class="row">
+                        <div class="col bg-light border-bottom">
+                            <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
+                            {{ $step->html }}
+                        </div>
                     </div>
                 @endforeach
-            </div>
         </div>
 
         <div class="mt-12">
