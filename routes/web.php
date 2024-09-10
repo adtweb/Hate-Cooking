@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('recipes.index');
-})->resource('recipes')->name('recipes');
+    return view('welcome');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,3 +38,5 @@ Route::resource('recipes', RecipeController::class);
 Route::resource('recipes.ingredients', IngredientController::class);
 Route::resource('recipes.steps', StepController::class);
 Route::middleware('auth')->resource('recipes.comments', CommentController::class);
+
+Route::redirect('/', '/recipe');
