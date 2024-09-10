@@ -12,7 +12,7 @@ class RecipePolicy
     public function before(User $user): bool|null
     {
         if ($user->isAdministrator() || $user->isModerator()) {
-            return true;
+            return false;
         }
 
         return null;
