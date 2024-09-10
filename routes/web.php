@@ -37,4 +37,4 @@ require __DIR__.'/auth.php';
 Route::resource('recipes', RecipeController::class);
 Route::resource('recipes.ingredients', IngredientController::class);
 Route::resource('recipes.steps', StepController::class);
-Route::middleware('auth')->resource('recipe.comments', CommentController::class);
+Route::middleware('auth')->resource('recipes.comments', CommentController::class);
