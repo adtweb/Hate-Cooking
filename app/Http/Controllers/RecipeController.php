@@ -31,7 +31,13 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'value' => ['required', 'string', 'max:255'],
+        ]);
+
+        $this->create([...$data, 'user_id' => $request->user()->id]);
+
+        return to_route('recipes.update', $this);
     }
 
     /**
@@ -62,7 +68,11 @@ class RecipeController extends Controller
      */
     public function update(Request $request, recipe $recipe)
     {
-        //
+        Gate::authorize('update', $recipe);
+
+        $recipe->update();
+
+        return to_route('recipes.show', $recipe);
     }
 
     /**
