@@ -29,7 +29,7 @@ class CommentController extends Controller
      */
     public function store(Request $request, Recipe $recipe)
     {
-        $data = $request->validate(['body' => ['required', 'string', 'max:255']]);
+        $data = $request->validate(['description' => ['required', 'string', 'max:255']]);
 
         $recipe->comments()->create([...$data, 'user_id' => $request->user()->id]);
 

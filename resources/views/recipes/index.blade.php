@@ -7,16 +7,16 @@
                     <a href="{{ route('recipes.show', $recipe) }}"><h2>{{ $recipe->value }}</h2></a>
                     <div class="row">
                         @foreach($recipe->categories as $category)
-                            <div class="col">{{ $category->value }}</div>
+                            <div class="col bg-light">{{ $category->value }}</div>
                         @endforeach
                         @foreach($recipe->qualities as $quality)
-                            <div class="col">{{ $quality->value }}</div>
+                            <div class="col bg-info">{{ $quality->value }}</div>
                         @endforeach
                     </div>
-                    <div>{!! $recipe->html !!}</div>
                     <span class="text-sm text-gray-600">
                         {{ $recipe->created_at->diffForHumans() }} от {{ $recipe->user->name }}
                     </span>
+                    <div>{!! $recipe->html !!}</div>
                 </li>
             @endforeach
         </ul>
