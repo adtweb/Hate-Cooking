@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-2 py-6">
         <div>
-            <h1 class="text-3xl font-semibold m-5">{{ $recipe->value }}</h1>
-            <div class="row">
+            <h1 class="text-3xl font-semibold mt-5">{{ $recipe->value }}</h1>
+            <div class="mt-10">
                 <span class="text-sm text-gray-600">
                     {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
                 </span>
