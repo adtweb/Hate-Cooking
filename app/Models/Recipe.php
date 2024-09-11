@@ -89,7 +89,7 @@ class Recipe extends Model
         $string = Str::slug($string);
 
         while (!empty(self::where('slug', $string)->first())) {
-            list($slug, $num) = preg_split('-', $string);
+            list($slug, $num) = preg_split('-', $string) ?: [$string, 0];
             $string = $slug . '-' . ++$num;
         }
 
