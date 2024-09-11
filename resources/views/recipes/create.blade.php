@@ -33,7 +33,7 @@
                         <div>
                         @foreach(\App\Models\Category::all() as $category)
                             <div class="inline-flex">
-                                <x-checkbox-input value="{{ $category->id }}" class="mt-1" name="category[]">{{ $category->value }}
+                                <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]"> {{ $category->value }}
                             </div>
                         @endforeach
                         </div>
