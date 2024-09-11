@@ -47,7 +47,7 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        return to_route('recipes.edit', $recipe->id);
+        return to_route('recipes.edit', ['recipe' => $recipe->id]);
     }
 
     /**
