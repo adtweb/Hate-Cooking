@@ -44,8 +44,6 @@ class RecipeController extends Controller
             ...$data,
             'slug' => Str::slug($data['value']),
             'photo_url' => $request->file('photo_url')->store('photos'),
-            'category_id' => $request->category = $data['category'],
-            'quality_id' => $request->quality->$data['category'],
             'user_id' => $request->user()->id
         ]);
 
