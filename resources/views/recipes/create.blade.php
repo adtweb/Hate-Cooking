@@ -30,12 +30,14 @@
                             <textarea name="description" id="description" cols="30" rows="10"></textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
+                        <div>
                         @foreach(\App\Models\Category::all() as $category)
-                            <div>
+                            <div class="inline-flex">
                                 <x-input-label for="{{ $category->id }}" :value="{{ $category->value }}" />
-                                <input type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" class="mt-1 block" name="category[]">{{ $category->value }}
+                                <input type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" class="mt-1" name="category">
                             </div>
                         @endforeach
+                        </div>
                     </form>
                 </div>
             </div>
