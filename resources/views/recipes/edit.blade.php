@@ -22,7 +22,7 @@
                         <div>
                             <x-input-label for="photo_url" :value="__('Фотография')" />
                             <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
-                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" :value="{{ $recipe->value }}" />
+                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" value="{{ $recipe->photo_url }}" />
                             <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
                         </div>
 
