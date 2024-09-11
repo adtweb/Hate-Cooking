@@ -70,7 +70,14 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        return view('recipes.edit', ['recipe' => $recipe]);
+        return view('recipes.edit', [
+            'recipe' => $recipe,
+            'qualities' => $recipe->qualities(),
+            'categories' => $recipe->categories(),
+            'ingredients' => $recipe->ingredients(),
+            'steps' => $recipe->steps(),
+            'comments' => $recipe->comments()->latest()->with('user')->paginate(10),
+        ]);
     }
 
     /**
