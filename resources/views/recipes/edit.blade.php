@@ -15,7 +15,7 @@
 
                         <div>
                             <x-input-label for="value" :value="__('Название')" />
-                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value')" required autofocus autocomplete="value" />
+                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value'), $recipe->value" required autofocus autocomplete="value" />
                             <x-input-error class="mt-2" :messages="$errors->get('value')" />
                         </div>
 
@@ -27,14 +27,16 @@
 
                         <div>
                             <x-input-label for="description" :value="__('Описание')" />
-                            <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
+                            <textarea name="description" id="description" cols="30" rows="10">{{ old('description'), $recipe->description }}</textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>
                             <x-input-label for="category" :value="__('Категория')" />
                             @foreach(\App\Models\Category::all() as $category)
                                 <div class="inline-flex p-5">
-                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[]')) /> {{ $category->value }}
+                                    <label>
+                                        <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[]', $recipe->caregories()->find($category->id) == 'on')) /> {{ $category->value }}
+                                    </label>
                                 </div>
                             @endforeach
                         </div>
@@ -42,7 +44,9 @@
                             <x-input-label for="quality" :value="__('Дополнительные свойства')" />
                             @foreach(\App\Models\Quality::all() as $quality)
                                 <div class="inline-flex p-5">
-                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[]')) /> {{ $quality->value }}
+                                    <label>
+                                        <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[]', $recipe->caregories()->find($category->id) == 'on')) /> {{ $quality->value }}
+                                    </label> {{ $quality->value }}
                                 </div>
                             @endforeach
                         </div>
