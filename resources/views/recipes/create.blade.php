@@ -32,7 +32,8 @@
                         </div>
                         @foreach(\App\Models\Category::all() as $category)
                             <div>
-                                <input type="checkbox" value="{{ $category->id }}" class="mt-1 block" id="category">{{ $category->name }}
+                                <x-input-label for="{{ $category->id }}" :value="{{ $category->value }}" />
+                                <input type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" class="mt-1 block" name="category[]">{{ $category->value }}
                             </div>
                         @endforeach
                     </form>
