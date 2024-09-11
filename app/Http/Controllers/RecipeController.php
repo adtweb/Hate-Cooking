@@ -47,13 +47,13 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        return to_route('recipes.edit', $recipe);
+        return to_route('recipes.edit', ['recipe' => $recipe]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(recipe $recipe)
+    public function show(Recipe $recipe)
     {
         return view('recipes.show', [
             'recipe' => $recipe,
@@ -68,9 +68,9 @@ class RecipeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(recipe $recipe)
+    public function edit(Recipe $recipe)
     {
-        return view('recipes.edit');
+        return view('recipes.edit', ['recipe' => $recipe]);
     }
 
     /**
@@ -94,7 +94,7 @@ class RecipeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(recipe $recipe)
+    public function destroy(Recipe $recipe)
     {
         Gate::authorize('delete', $recipe);
 
