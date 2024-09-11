@@ -88,7 +88,7 @@ class RecipeController extends Controller
 
         $recipe->update([...$data]);
 
-        return to_route('recipes.show', $recipe);
+        return to_route('recipes.show', ['recipe' => $recipe]);
     }
 
     /**
