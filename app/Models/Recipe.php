@@ -86,13 +86,16 @@ class Recipe extends Model
 
     public static function getUniqSlug(string $string): string
     {
-        $string = Str::slug($string);
+        $slug = Str::slug($string);
+        $num = 0;
 
-        while (!empty(self::where('slug', $string)->first())) {
-            list($slug, $num) = preg_split('-', $string) ?: [$string, 0];
-            $string = $slug . '-' . ++$num;
+        while (!empty(self::where('slug', $slug)->first())) {
+            if (preg_match('-', $slug)) {
+                list($slug, $num) = preg_split('-', $slug);
+            }
+            $slug = $slug . '-' . ++$num;
         }
 
-        return $string;
+        return $slug;
     }
 }
