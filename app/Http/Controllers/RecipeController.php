@@ -37,18 +37,17 @@ class RecipeController extends Controller
             'description' => 'required',
         ]);
 
-        $recipe = new Recipe();
-
-        $recipe->create([
+        $recipe = Recipe::create([
             ...$data,
             'slug' => Recipe::getUniqSlug($data['value']),
             'photo_url' => $request->file('photo_url')->store('photos'),
             'user_id' => $request->user()->id
         ]);
 
-//        $recipe->categories()->attach($request->categories);
+        $recipe->categories()->attach($request->categories);
+        $recipe->qualities()->attach($request->qualities);
 
-        return to_route('recipes.edit', ['recipe' => $recipe]);
+        return to_route('recipes.edit', $recipe);
     }
 
     /**
