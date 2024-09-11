@@ -34,7 +34,7 @@
                             <x-input-label for="category" :value="__('Категория')" />
                             @foreach(\App\Models\Category::all() as $category)
                                 <div class="inline-flex m-5">
-                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]" @checked(old('category[]')) /> {{ $category->value }}
+                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[]')) /> {{ $category->value }}
                                 </div>
                             @endforeach
                         </div>
@@ -42,7 +42,7 @@
                             <x-input-label for="quality" :value="__('Дополнительные свойства')" />
                             @foreach(\App\Models\Quality::all() as $quality)
                                 <div class="inline-flex m-5">
-                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="quality[]" @checked(old('quality[]')) /> {{ $quality->value }}
+                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[]')) /> {{ $quality->value }}
                                 </div>
                             @endforeach
                         </div>
