@@ -31,11 +31,20 @@
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>
-                        @foreach(\App\Models\Category::all() as $category)
-                            <div class="inline-flex">
-                                <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]"> {{ $category->value }}
-                            </div>
-                        @endforeach
+                            <x-input-label for="category" :value="__('Категория')" />
+                            @foreach(\App\Models\Category::all() as $category)
+                                <div class="inline-flex">
+                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]"> {{ $category->value }}
+                                </div>
+                            @endforeach
+                        </div>
+                        <div>
+                            <x-input-label for="category" :value="__('Дополнительные свойства')" />
+                            @foreach(\App\Models\Quality::all() as $quality)
+                                <div class="inline-flex">
+                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="quality[]"> {{ $quality->value }}
+                                </div>
+                            @endforeach
                         </div>
                         <x-primary-button type="submit">Добавить</x-primary-button>
                     </form>
