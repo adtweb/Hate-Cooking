@@ -11,16 +11,8 @@
                 <div class="max-w-xl">
                     <form method="POST" action="{{ route('recipes.store') }}" class="mt-6 space-y-6" >
                         @csrf
+                        @method('POST')
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                         <div>
                             <x-input-label for="value" :value="__('Название')" />
                             <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" required autofocus autocomplete="value" />
@@ -29,15 +21,20 @@
 
                         <div>
                             <x-input-label for="photo_url" :value="__('Фотография')" />
-                            <x-text-input id="photo_url" name="photo_url" type="text" class="mt-1 block w-full" required autofocus autocomplete="value" />
-                            <x-input-error class="mt-2" :messages="$errors->get('value')" />
+                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" required autofocus />
+                            <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
                         </div>
 
                         <div>
-                            <x-input-label for="value" :value="__('Название')" />
-                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" required autofocus autocomplete="value" />
-                            <x-input-error class="mt-2" :messages="$errors->get('value')" />
+                            <x-input-label for="description" :value="__('Описание')" />
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
+                        @foreach(\App\Models\Category::all() as $category)
+                            <div>
+                                <input type="checkbox" value="{{ $category->id }}" class="mt-1 block" id="category">{{ $category->name }}
+                            </div>
+                        @endforeach
                     </form>
                 </div>
             </div>
