@@ -36,7 +36,7 @@
                             @foreach(\App\Models\Category::all() as $category)
                                 <div class="inline-flex p-5">
                                     <label>
-                                        <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[$category->id]') or in_array($category->id, $categories)) /> {{ $category->value }}
+                                        <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[$category->id]')) /> {{ $category->value }}
                                     </label>
                                 </div>
                             @endforeach
@@ -46,7 +46,7 @@
                             @foreach(\App\Models\Quality::all() as $quality)
                                 <div class="inline-flex p-5">
                                     <label>
-                                        <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[$quality->id]') or in_array($quality->id, $qualities)) /> {{ $quality->value }}
+                                        <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[$quality->id]')) /> {{ $quality->value }}
                                     </label> {{ $quality->value }}
                                 </div>
                             @endforeach
