@@ -42,7 +42,7 @@ class RecipeController extends Controller
 
         $recipe->create([
             ...$data,
-            'slug' => Str::slug($data['value']),
+            'slug' => Recipe::getUniqSlug($data['value']),
             'photo_url' => $request->file('photo_url')->store('photos'),
             'user_id' => $request->user()->id
         ]);

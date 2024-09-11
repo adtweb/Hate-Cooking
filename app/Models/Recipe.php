@@ -84,7 +84,7 @@ class Recipe extends Model
         return Attribute::get(fn () => str($this->description)->markdown());
     }
 
-    public function getSlug(string $string): string
+    public static function getUniqSlug(string $string): string
     {
         $string = Str::slug($string);
 
