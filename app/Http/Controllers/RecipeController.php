@@ -44,10 +44,12 @@ class RecipeController extends Controller
             ...$data,
             'slug' => Str::slug($data['value']),
             'photo_url' => $request->file('photo_url')->store('photos'),
+            'category_id' => $request->category = $data['category'],
+            'quality_id' => $request->quality->$data['category'],
             'user_id' => $request->user()->id
         ]);
 
-        return to_route('recipes.edit', ['recipe' => $recipe]);
+        return to_route('recipes.{recipe}.edit', ['recipe' => $recipe]);
     }
 
     /**
@@ -70,7 +72,7 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        return view('recipes.edit', ['recipe' => $recipe]);
+        return view('recipes.{recipe}.edit', ['recipe' => $recipe]);
     }
 
     /**
@@ -88,7 +90,7 @@ class RecipeController extends Controller
 
         $recipe->update([...$data]);
 
-        return to_route('recipes.show', ['recipe' => $recipe]);
+        return to_route('recipes.{recipe}.show', ['recipe' => $recipe]);
     }
 
     /**
