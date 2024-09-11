@@ -47,14 +47,9 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        foreach ($data['categories'] ?? [] as $category) {
-            $recipe->categories()->attach($category);
-        }
-        foreach ($data['qualities'] ?? [] as $quality) {
-            $recipe->qualities()->attach($quality);
-        }
+        $recipe->categories()->attach($request->categories);
 
-        return to_route('recipes.edit', $recipe->id);
+        return to_route('recipes.edit', $recipe);
     }
 
     /**
@@ -77,7 +72,7 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        return view('recipes.{recipe}.edit', ['recipe' => $recipe]);
+        return view('recipes.edit', [$recipe]);
     }
 
     /**
@@ -93,9 +88,14 @@ class RecipeController extends Controller
             'description' => 'required',
         ]);
 
-        $recipe->update([...$data]);
+        $recipe->update([
+            ...$data,
+            'photo_url' => $request->file('photo_url')->store('photos'),
+        ]);
+        $recipe->categories()->attach($request->categories);
+        $recipe->qualities()->attach($request->qualities);
 
-        return to_route('recipes.show', ['recipe' => $recipe->id]);
+        return to_route('recipes.show', [$recipe]);
     }
 
     /**

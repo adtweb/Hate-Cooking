@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class Recipe extends Model
 {
@@ -81,5 +82,17 @@ class Recipe extends Model
     public function html(): Attribute
     {
         return Attribute::get(fn () => str($this->description)->markdown());
+    }
+
+    public function getSlug(string $string): string
+    {
+        $string = Str::slug($string);
+
+        while (!empty(self::where('slug', $string)->first())) {
+            list($slug, $num) = preg_split('-', $string);
+            $string = $slug . '-' . ++$num;
+        }
+
+        return $string;
     }
 }
