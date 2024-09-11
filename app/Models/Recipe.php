@@ -90,8 +90,8 @@ class Recipe extends Model
         $num = 0;
 
         while (!empty(self::where('slug', $slug)->first())) {
-            if (preg_match("/\-/", $slug)) {
-                list($slug, $num) = preg_split("/\-/", $slug);
+            if (preg_match("/-/", $slug)) {
+                list($slug, $num) = preg_split("/-/", $slug);
             }
 
             $slug = $slug . '-' . ++$num;
