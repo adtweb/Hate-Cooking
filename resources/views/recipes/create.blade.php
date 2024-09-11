@@ -33,11 +33,12 @@
                         <div>
                         @foreach(\App\Models\Category::all() as $category)
                             <div class="inline-flex">
-                                <x-input-label for="{{ $category->id }}" :value="{{ $category->value }}" />
-                                <input type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" class="mt-1" name="category">
+                                <x-input-label for="category{{ $loop->iteration }}" :value="{{ $category->value }}" />
+                                <input type="checkbox" value="{{ $category->id }}" id="category{{ $loop->iteration }}" class="mt-1" name="category[]">
                             </div>
                         @endforeach
                         </div>
+                        <x-primary-button type="submit">Добавить</x-primary-button>
                     </form>
                 </div>
             </div>
