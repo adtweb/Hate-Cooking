@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
@@ -39,7 +40,7 @@ class RecipeController extends Controller
 
         $recipe = new Recipe();
 
-        $recipe->create([...$data, 'user_id' => $request->user()->id]);
+        $recipe->create([...$data, 'slug' => Str::slug($data['value']), 'user_id' => $request->user()->id]);
 
         return to_route('recipes.edit', $recipe);
     }
