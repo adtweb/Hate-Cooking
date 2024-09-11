@@ -58,7 +58,7 @@
                         @if(empty($steps))
                             <p>Ингредиенты не добавлены</p>
                         @endif
-                            <form action="{{ route('recipes.ingredients.store', $recipe) }}" method="POST" class="mt-2">
+                            <form action="{{ route('recipes.ingredients.store', $recipe) }}" method="POST" class="mt-2" enctype="multipart/form-data">
                                 @csrf
 
                                 <div>

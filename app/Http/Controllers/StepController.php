@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recipe;
+use App\Models\Step;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class StepController extends Controller
@@ -25,9 +28,16 @@ class StepController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Recipe $recipe)
     {
-        //
+        $data = $request->validate([
+            'photo_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'description' => 'required',
+        ]);
+
+        $recipe->steps()->create([...$data]);
+
+        return to_route('recipes.edit', $recipe);
     }
 
     /**
@@ -57,8 +67,12 @@ class StepController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Recipe $recipe, Step $step)
     {
-        //
+        Gate::authorize('delete', $step);
+
+        $step->delete();
+
+        return to_route('recipes.edit', $recipe);
     }
 }

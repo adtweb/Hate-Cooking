@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredient;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IngredientController extends Controller
 {
@@ -25,9 +28,16 @@ class IngredientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Recipe $recipe)
     {
-        //
+        $data = $request->validate([
+            'value' => ['required', 'string', 'max:255'],
+            'quantity' => ['required', 'string', 'max:255'],
+        ]);
+
+        $recipe->ingredients()->create([...$data]);
+
+        return to_route('recipes.edit', $recipe);
     }
 
     /**
@@ -57,8 +67,12 @@ class IngredientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Recipe $recipe, Ingredient $ingredient)
     {
-        //
+        Gate::authorize('delete', $ingredient);
+
+        $ingredient->delete();
+
+        return to_route('recipes.edit', $recipe);
     }
 }
