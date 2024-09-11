@@ -37,8 +37,6 @@ class Recipe extends Model
         'description',
     ];
 
-    public $incrementing = false;
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
