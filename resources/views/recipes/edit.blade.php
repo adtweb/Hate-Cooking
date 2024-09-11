@@ -15,20 +15,20 @@
 
                         <div>
                             <x-input-label for="value" :value="__('Название')" />
-                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value') or $recipe->value" required autofocus autocomplete="value" />
+                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value') ?: $recipe->value" required autofocus autocomplete="value" />
                             <x-input-error class="mt-2" :messages="$errors->get('value')" />
                         </div>
 
                         <div>
                             <x-input-label for="photo_url" :value="__('Фотография')" />
                             <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
-                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" required autofocus />
+                            <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" :value="{{ $recipe->value }}" />
                             <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
                         </div>
 
                         <div>
                             <x-input-label for="description" :value="__('Описание')" />
-                            <textarea name="description" id="description" cols="30" rows="10">{{ old('description') or $recipe->description }}</textarea>
+                            <textarea name="description" id="description" cols="30" rows="10">{{ old('description') ?: $recipe->description }}</textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>
