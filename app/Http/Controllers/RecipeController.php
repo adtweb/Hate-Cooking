@@ -40,7 +40,12 @@ class RecipeController extends Controller
 
         $recipe = new Recipe();
 
-        $recipe->create([...$data, 'slug' => Str::slug($data['value']), 'user_id' => $request->user()->id]);
+        $recipe->create([
+            ...$data,
+            'slug' => Str::slug($data['value']),
+            'photo_url' => $request->file('photo_url')->store('photos'),
+            'user_id' => $request->user()->id
+        ]);
 
         return to_route('recipes.edit', $recipe);
     }
