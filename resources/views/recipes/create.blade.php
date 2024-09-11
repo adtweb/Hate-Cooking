@@ -15,7 +15,7 @@
 
                         <div>
                             <x-input-label for="value" :value="__('Название')" />
-                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" required autofocus autocomplete="value" />
+                            <x-text-input id="value" name="value" type="text" class="mt-1 block w-full" :value="old('value')" required autofocus autocomplete="value" />
                             <x-input-error class="mt-2" :messages="$errors->get('value')" />
                         </div>
 
@@ -27,22 +27,22 @@
 
                         <div>
                             <x-input-label for="description" :value="__('Описание')" />
-                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <textarea name="description" id="description" cols="30" rows="10"> :value="old('value') </textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>
                             <x-input-label for="category" :value="__('Категория')" />
                             @foreach(\App\Models\Category::all() as $category)
-                                <div class="inline-flex">
-                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]"> {{ $category->value }}
+                                <div class="inline-flex m-5">
+                                    <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="category[]" {{ old('agreement') == 'on' ? 'checked' : '' }}> {{ $category->value }}
                                 </div>
                             @endforeach
                         </div>
                         <div>
                             <x-input-label for="category" :value="__('Дополнительные свойства')" />
                             @foreach(\App\Models\Quality::all() as $quality)
-                                <div class="inline-flex">
-                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="quality[]"> {{ $quality->value }}
+                                <div class="inline-flex m-5">
+                                    <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="quality[]" {{ old('agreement') == 'on' ? 'checked' : '' }}> {{ $quality->value }}
                                 </div>
                             @endforeach
                         </div>
