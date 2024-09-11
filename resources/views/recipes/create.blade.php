@@ -27,7 +27,7 @@
 
                         <div>
                             <x-input-label for="description" :value="__('Описание')" />
-                            <textarea name="description" id="description" cols="30" rows="10"> :value="old('value') </textarea>
+                            <textarea name="description" id="description" cols="30" rows="10">old('description'</textarea>
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>

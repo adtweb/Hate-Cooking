@@ -33,7 +33,7 @@ class RecipeController extends Controller
     {
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
-            'photo_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
             'description' => 'required',
         ]);
 
