@@ -27,14 +27,14 @@
 
                         <div>
                             <x-input-label for="description" :value="__('Описание')" />
-                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <x-textarea-input name="description" id="description" cols="30" rows="10">
                             <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
                         <div>
                         @foreach(\App\Models\Category::all() as $category)
                             <div class="inline-flex">
                                 <x-input-label for="category{{ $loop->iteration }}" :value="{{ $category->value }}" />
-                                <input type="checkbox" value="{{ $category->id }}" id="category{{ $loop->iteration }}" class="mt-1" name="category[]">
+                                <x-checkbox-input value="{{ $category->id }}" id="category{{ $loop->iteration }}" class="mt-1" name="category[]">
                             </div>
                         @endforeach
                         </div>
