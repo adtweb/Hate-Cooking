@@ -87,6 +87,7 @@ class Recipe extends Model
     public static function getUniqSlug(string $string): string
     {
         $slug = Str::slug($string, '_');
+        $num = 0;
 
         while (!empty(self::where('slug', $slug)->first())) {
             if (preg_match("/\-/", $slug)) {
