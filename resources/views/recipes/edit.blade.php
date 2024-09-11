@@ -106,7 +106,7 @@
                             <textarea name="description" id="description" cols="30" rows="5" class="w-full">
                                 {{ old('description') }}
                             </textarea>
-                            <x-primary-button type="submit">Добавить ингредиент</x-primary-button>
+                            <x-primary-button type="submit">Добавить шаг</x-primary-button>
                         </form>
                         @foreach($steps as $step)
                             <div class="row">
