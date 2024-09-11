@@ -47,8 +47,12 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        $recipe->categories()->attach($request->categories);
-        $recipe->qualities()->attach($request->qualities);
+        foreach ($request->categories as $category) {
+            $recipe->categories()->attach($category);
+        }
+        foreach ($request->qualities as $quality) {
+            $recipe->qualities()->attach($quality);
+        }
 
         return to_route('recipes.edit', $recipe->id);
     }
@@ -85,13 +89,13 @@ class RecipeController extends Controller
 
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
-            'photo_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
             'description' => 'required',
         ]);
 
         $recipe->update([...$data]);
 
-        return to_route('recipes.{recipe}.show', ['recipe' => $recipe]);
+        return to_route('recipes.show', ['recipe' => $recipe->id]);
     }
 
     /**
