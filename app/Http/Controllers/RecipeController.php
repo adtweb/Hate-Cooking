@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
@@ -47,9 +46,9 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        $recipe->categories()->attach($request->categories);
+//        $recipe->categories()->attach($request->categories);
 
-        return to_route('recipes.edit', $recipe);
+        return to_route('recipes.edit', ['recipe' => $recipe]);
     }
 
     /**
@@ -72,7 +71,7 @@ class RecipeController extends Controller
      */
     public function edit(Recipe $recipe)
     {
-        return view('recipes.edit', [$recipe]);
+        return view('recipes.edit', ['recipe' => $recipe]);
     }
 
     /**
