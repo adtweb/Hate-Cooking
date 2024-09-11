@@ -47,10 +47,10 @@ class RecipeController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-        foreach ($request->categories as $category) {
+        foreach ($data['categories'] ?? [] as $category) {
             $recipe->categories()->attach($category);
         }
-        foreach ($request->qualities as $quality) {
+        foreach ($data['qualities'] ?? [] as $quality) {
             $recipe->qualities()->attach($quality);
         }
 
