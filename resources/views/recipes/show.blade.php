@@ -1,7 +1,7 @@
 <x-app-layout>
-    <x-slot name="header" class="p-4 sm:p-8">
-        <h2 class="font-semibold text-gray-800 dark:text-gray-200 leading-tight">
-            <a href="{{ route('recipes.index') }}">{{ __('Рецепты') }}</a> &gt;  {{ $recipe->value }}
+    <x-slot name="header" class="p-4">
+        <h2 class="sm:p-8 font-semibold text-sm text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{ route('recipes.index') }}">{{ __('Рецепты') }}</a> &gt; {{ $recipe->value }}
         </h2>
     </x-slot>
 
@@ -10,9 +10,9 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                 <div>
-                    <h1 class="text-3xl font-semibold mt-5">{{ $recipe->value }}</h1>
+                    <h1 class="text-xl font-semibold mt-5">{{ $recipe->value }}</h1>
                     <div class="mt-10">
-                        <span class="text-xl text-gray-600">
+                        <span class="text-sm text-gray-600">
                             {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
                         </span>
                     </div>
