@@ -76,7 +76,6 @@ class RecipeController extends Controller
             'categories' => $recipe->categories(),
             'ingredients' => $recipe->ingredients(),
             'steps' => $recipe->steps(),
-            'comments' => $recipe->comments()->latest()->with('user')->paginate(10),
         ]);
     }
 
@@ -89,10 +88,12 @@ class RecipeController extends Controller
 
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
-            'photo_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
             'description' => 'required',
         ]);
         if ($request->photo_url) {
+            $request->validate([
+                'photo_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+            ]);
             $data['photo_url'] = $request->file('photo_url')->store('photos');
         }
 
