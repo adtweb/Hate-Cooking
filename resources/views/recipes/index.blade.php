@@ -1,6 +1,15 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto py-6 px-2">
-        <ul class="divide-y">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Новые рецепты') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                <ul class="divide-y">
             @foreach($recipes as $recipe)
                 <li class="py-4 px-2">
                     <a href="{{ route('recipes.show', $recipe) }}"><img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" /></a>
@@ -23,6 +32,9 @@
 
         <div class="mt-2">
             {{ $recipes->links() }}
+        </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

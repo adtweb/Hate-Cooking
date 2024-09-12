@@ -1,6 +1,15 @@
 <x-app-layout>
-    <div class="max-w-5xl mx-auto px-2 py-6">
-        <div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Новый рецепт') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                <div>
             <h1 class="text-3xl font-semibold mt-5">{{ $recipe->value }}</h1>
             <div class="mt-10">
                 <span class="text-sm text-gray-600">
@@ -102,6 +111,9 @@
 
             <div class="mt-2">
                 {{ $comments->fragment('comments')->links() }}
+            </div>
+        </div>
+                </div>
             </div>
         </div>
     </div>
