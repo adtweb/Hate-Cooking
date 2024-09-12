@@ -35,7 +35,10 @@ class StepController extends Controller
             'description' => 'required',
         ]);
 
-        $recipe->steps()->create([...$data]);
+        $recipe->steps()->create([
+            ...$data,
+            'photo_url' => $request->file('photo_url')->store('photos')
+        ]);
 
         return to_route('recipes.edit', $recipe);
     }
