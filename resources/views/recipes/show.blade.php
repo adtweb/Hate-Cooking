@@ -19,7 +19,7 @@
                     <div class="mt-10">
                         <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
                     </div>
-            <div class="p-5">
+            <div class="m-4">
                 @foreach($recipe->categories as $category)
                     <div class="inline-flex text-sm"><span class="bg-light">{{ $category->value }}</span></div>
                 @endforeach
@@ -34,15 +34,18 @@
         </div>
 
         @can('update', $recipe)
+        <div class="prose m-4">
             <a
                 href="{{ route('recipes.update', ['recipe' => $recipe]) }}"
                 class="mt-2">
 
                 Изменить
             </a>
+        </div>
         @endcan
 
         @can('delete', $recipe)
+        <div class="prose m-4">
             <form
                 action="{{ route('recipes.destroy', ['recipe' => $recipe]) }}"
                 method="POST" class="mt-2">
@@ -51,14 +54,15 @@
 
                 <x-danger-button type="submit">Удалить</x-danger-button>
             </form>
+        </div>
         @endcan
 
         <div class="mt-12">
-            <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
+            <h2 id="ingredients" class="text-2xl font-semibold m-5">Ингредиенты</h2>
                 @foreach($recipe->ingredients as $ingredient)
-                    <div class="row">
-                        <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
-                        <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
+                    <div class="flex-row">
+                        <div class="flex-column bg-light border-bottom">{{ $ingredient->value }}</div>
+                        <div class="flex-column bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
                     </div>
                 @endforeach
         </div>
@@ -66,11 +70,11 @@
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold">Приготовление</h2>
                 @foreach($recipe->steps as $step)
-                    <div class="row">
-                        <div class="col bg-light border-bottom">
+                    <div class="mt-5">
+                        <div class="inline-flex bg-light border-bottom">
                             <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
                         </div>
-                        <div class="col bg-light border-bottom">
+                        <div class="inline-flex bg-light border-bottom">
                             {!! $step->html !!}
                         </div>
                     </div>
