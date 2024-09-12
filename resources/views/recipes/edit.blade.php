@@ -36,7 +36,7 @@
                             @foreach(\App\Models\Category::all() as $category)
                                 <div class="inline-flex p-5">
                                     <label>
-                                        <input type="checkbox" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[$category->id]')) /> {{ $category->value }}
+                                        <input type="checkbox" id="{{ $category->id }}" value="{{ $category->id }}" class="mt-1" name="categories[]" @checked(old('categories[]') ?: $recipe->categories->find($category->id)) /> {{ $category->value }}
                                     </label>
                                 </div>
                             @endforeach
@@ -45,8 +45,8 @@
                             <x-input-label for="quality" :value="__('Дополнительные свойства')" />
                             @foreach(\App\Models\Quality::all() as $quality)
                                 <div class="inline-flex p-5">
-                                    <label>
-                                        <input type="checkbox" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[$quality->id]')) /> {{ $quality->value }}
+                                    <label>{{ $recipe->quality_id }}
+                                        <input type="checkbox" id="{{ $quality->id }}" value="{{ $quality->id }}" class="mt-1" name="qualities[]" @checked(old('qualities[]') ?: $recipe->qualities->find($quality->id)) /> {{ $quality->value }}
                                     </label>
                                 </div>
                             @endforeach

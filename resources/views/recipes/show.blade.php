@@ -60,9 +60,9 @@
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold m-5">Ингредиенты</h2>
                 @foreach($recipe->ingredients as $ingredient)
-                    <div class="flex-row">
-                        <div class="flex-column bg-light border-bottom">{{ $ingredient->value }}</div>
-                        <div class="flex-column bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
+                    <div class="row">
+                        <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
+                        <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
                     </div>
                 @endforeach
         </div>
