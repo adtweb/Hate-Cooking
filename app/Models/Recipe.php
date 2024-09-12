@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
@@ -21,6 +23,7 @@ class Recipe extends Model
     use HasFactory;
     use HasUuids;
     use Notifiable;
+    use HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +39,24 @@ class Recipe extends Model
         'photo_url',
         'description',
     ];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('value')
+            ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Replace the default route key.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function user(): BelongsTo
     {

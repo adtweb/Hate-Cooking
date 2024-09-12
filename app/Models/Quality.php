@@ -10,14 +10,35 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Quality extends Model
 {
     use HasFactory;
     use HasUuids;
     use Notifiable;
+    use HasSlug;
 
     protected $fillable = ['value', 'slug'];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('value')
+            ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Replace the default route key.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function recipes(): BelongsToMany
     {
