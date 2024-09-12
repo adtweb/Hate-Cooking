@@ -92,7 +92,7 @@ class RecipeController extends Controller
         ]);
         if ($request->photo_url) {
             $request->validate([
-                'photo_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+                'photo_url' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
             ]);
             $data['photo_url'] = $request->file('photo_url')->store('photos');
         }
