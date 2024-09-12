@@ -89,18 +89,18 @@ class RecipeController extends Controller
 
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
-            'photo_url' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'photo_url' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
             'description' => 'required',
         ]);
+        if ($request->photo_url) {
+            $data['photo_url'] = $request->file('photo_url')->store('photos');
+        }
 
-        $recipe->update([
-            ...$data,
-            'photo_url' => $request->file('photo_url')->store('photos'),
-        ]);
+        $recipe->update([...$data]);
         $recipe->categories()->attach($request->categories);
         $recipe->qualities()->attach($request->qualities);
 
-        return to_route('recipes.show', [$recipe]);
+        return to_route('recipes.show', ['recipe' => $recipe]);
     }
 
     /**
