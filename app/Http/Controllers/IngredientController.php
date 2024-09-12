@@ -69,7 +69,7 @@ class IngredientController extends Controller
      */
     public function destroy(Recipe $recipe, Ingredient $ingredient)
     {
-        Gate::authorize('delete', $ingredient);
+        Gate::authorize('delete', $recipe);
 
         $ingredient->delete();
 

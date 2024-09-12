@@ -69,7 +69,7 @@ class StepController extends Controller
      */
     public function destroy(Recipe $recipe, Step $step)
     {
-        Gate::authorize('delete', $step);
+        Gate::authorize('delete', $recipe);
 
         $step->delete();
 
