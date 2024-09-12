@@ -88,6 +88,7 @@ class RecipeController extends Controller
 
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
+            'photo_url' => ['nullable'],
             'description' => 'required',
         ]);
         if ($request->photo_url) {
