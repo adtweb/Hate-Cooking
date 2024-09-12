@@ -55,7 +55,7 @@
                     </form>
                     <div class="mt-12">
                         <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
-                        @if(empty($steps))
+                        @if(!$ingredients)
                             <p>Ингредиенты не добавлены</p>
                         @endif
                             <form action="{{ route('recipes.ingredients.store', $recipe) }}" method="POST" class="mt-2" enctype="multipart/form-data">
@@ -73,7 +73,7 @@
                                 </div>
                                 <x-primary-button type="submit">Добавить ингредиент</x-primary-button>
                             </form>
-                        @foreach($ingredients as $ingredient)
+                        @foreach($ingredients ?? [] as $ingredient)
                             <div class="row">
                                 <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
                                 <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
@@ -94,7 +94,7 @@
 
                     <div class="mt-12">
                         <h2 id="ingredients" class="text-2xl font-semibold">Приготовление</h2>
-                        @if(empty($steps))
+                        @if(!$steps)
                             <p>Способ приготовления не добавлен</p>
                         @endif
                         <form action="{{ route('recipes.steps.store', $recipe) }}" method="POST" class="mt-2">
@@ -103,12 +103,10 @@
                             <x-input-label for="photo_url" :value="__('Фотография')" />
                             <x-text-input id="photo_url" name="photo_url" type="file" class="mt-1 block w-full" />
                             <x-input-error class="mt-2" :messages="$errors->get('photo_url')" />
-                            <textarea name="description" id="description" cols="30" rows="5" class="w-full">
-                                {{ old('description') }}
-                            </textarea>
+                            <textarea name="description" id="description" cols="30" rows="5" class="w-full">{{ old('description') }}</textarea>
                             <x-primary-button type="submit">Добавить шаг</x-primary-button>
                         </form>
-                        @foreach($steps as $step)
+                        @foreach($steps ?? [] as $step)
                             <div class="row">
                                 <div class="col bg-light border-bottom">
                                     <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
