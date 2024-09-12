@@ -37,6 +37,7 @@ class IngredientController extends Controller
 
         $recipe->ingredients()->create([...$data]);
 
+
         return to_route('recipes.edit', $recipe);
     }
 
