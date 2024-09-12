@@ -100,7 +100,7 @@
                         @if(!$recipe->steps)
                             <p>Способ приготовления не добавлен</p>
                         @endif
-                        <form action="{{ route('recipes.steps.store', $recipe) }}" method="POST" class="mt-2">
+                        <form action="{{ route('recipes.steps.store', $recipe) }}" method="POST" class="mt-2" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
 
