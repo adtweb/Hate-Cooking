@@ -59,26 +59,30 @@
 
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold m-5">Ингредиенты</h2>
+            <table style="width:100%">
                 @foreach($recipe->ingredients as $ingredient)
-                    <div class="row">
-                        <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
-                        <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
-                    </div>
+                    <tr class="border-bottom">
+                        <td class="bg-light border-bottom">{{ $ingredient->value }}</td>
+                        <td class="bg-light border-bottom bold">{{ $ingredient->quantity }}</td>
+                    </tr>
                 @endforeach
+            </table>
         </div>
 
         <div class="mt-12">
             <h2 id="ingredients" class="text-2xl font-semibold">Приготовление</h2>
+            <table style="width:100%">
                 @foreach($recipe->steps as $step)
-                    <div class="mt-5">
-                        <div class="inline-flex bg-light border-bottom">
+                    <tr class="mt-5">
+                        <td class="inline-flex bg-light border-bottom">
                             <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
-                        </div>
-                        <div class="inline-flex bg-light border-bottom">
+                        </td>
+                        <td class="inline-flex bg-light border-bottom">
                             {!! $step->html !!}
-                        </div>
-                    </div>
+                        </td>
+                    </tr>
                 @endforeach
+            </table>
         </div>
 
         <div class="mt-12">
