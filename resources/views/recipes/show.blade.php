@@ -36,7 +36,7 @@
         @can('update', $recipe)
         <div class="prose m-4">
             <a
-                href="{{ route('recipes.update', ['recipe' => $recipe]) }}"
+                href="{{ route('recipes.edit', ['recipe' => $recipe]) }}"
                 class="mt-2">
 
                 Изменить
