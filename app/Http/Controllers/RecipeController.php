@@ -89,7 +89,7 @@ class RecipeController extends Controller
 
         $data = $request->validate([
             'value' => ['required', 'string', 'max:255'],
-            'photo_url' => ['image', 'mimes:jpeg,png,jpg,gif,svg'],
+            'photo_url' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
             'description' => 'required',
         ]);
         if ($request->photo_url) {
