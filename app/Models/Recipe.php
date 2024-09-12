@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class Recipe extends Model
 {
@@ -30,7 +34,13 @@ class Recipe extends Model
         'category_id',
         'quality_id',
         'photo_url',
+        'description',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Get the steps for the recipe.
@@ -67,5 +77,26 @@ class Recipe extends Model
     public function ingredients(): HasMany
     {
         return $this->hasMany(Ingredient::class);
+    }
+
+    public function html(): Attribute
+    {
+        return Attribute::get(fn () => str($this->description)->markdown());
+    }
+
+    public static function getUniqSlug(string $string): string
+    {
+        $slug = Str::slug($string, '_');
+        $num = 0;
+
+        while (!empty(self::where('slug', $slug)->first())) {
+            if (preg_match("/-/", $slug)) {
+                list($slug, $num) = preg_split("/-/", $slug);
+            }
+
+            $slug = $slug . '-' . ++$num;
+        }
+
+        return $slug;
     }
 }

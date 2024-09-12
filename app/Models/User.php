@@ -66,4 +66,14 @@ class User extends Authenticatable implements FilamentUser
         return true;
 //        return $this->role == Role::administrator();
     }
+
+    public function isAdministrator(): bool
+    {
+        return $this->role == Role::administrator();
+    }
+
+    public function isModerator(): bool
+    {
+        return $this->role == Role::moderator();
+    }
 }

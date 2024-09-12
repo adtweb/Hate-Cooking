@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Notifications\Notifiable;
 
 class Comment extends Model
@@ -16,7 +17,7 @@ class Comment extends Model
     use HasUuids;
     use Notifiable;
 
-    protected $fillable = ['comment'];
+    protected $fillable = ['comment', 'user_id'];
 
     public function recipe(): BelongsTo
     {
