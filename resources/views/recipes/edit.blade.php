@@ -55,7 +55,7 @@
                     </form>
                     <div class="mt-12">
                         <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
-                        @if(!$ingredients)
+                        @if(!$recipe->ingredients())
                             <p>Ингредиенты не добавлены</p>
                         @endif
                             <form action="{{ route('recipes.ingredients.store', $recipe) }}" method="POST" class="mt-2" enctype="multipart/form-data">
@@ -73,7 +73,7 @@
                                 </div>
                                 <x-primary-button type="submit">Добавить ингредиент</x-primary-button>
                             </form>
-                        @foreach($ingredients ?? [] as $ingredient)
+                        @foreach($recipe->ingredients() ?? [] as $ingredient)
                             <div class="row">
                                 <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
                                 <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
