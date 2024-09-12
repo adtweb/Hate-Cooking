@@ -19,12 +19,12 @@
                     <div class="mt-10">
                         <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
                     </div>
-            <div class="row p-5">
+            <div class="p-5">
                 @foreach($recipe->categories as $category)
-                    <div class="col"><span class="bg-light p-3">{{ $category->value }}</span></div>
+                    <div class="inline-flex text-sm"><span class="bg-light">{{ $category->value }}</span></div>
                 @endforeach
                 @foreach($recipe->qualities as $quality)
-                    <div class="col"><span class="bg-info p-3">{{ $quality->value }}</span></div>
+                    <div class="inline-flex text-sm"><span class="bg-light">{{ $quality->value }}</span></div>
                 @endforeach
             </div>
         </div>

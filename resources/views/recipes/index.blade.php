@@ -17,12 +17,12 @@
                         {{ $recipe->created_at->diffForHumans() }} от {{ $recipe->user->name }}
                     </span>
                     <a href="{{ route('recipes.show', $recipe) }}"><img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" /></a>
-                    <div class="flex-row">
+                    <div class="p-5">
                         @foreach($recipe->categories as $category)
-                            <div class="flex-col text-sm sm:p-3 bg-primary-500">{{ $category->value }}</div>
+                            <div class="inline-flex text-sm">{{ $category->value }}</div>
                         @endforeach
                         @foreach($recipe->qualities as $quality)
-                            <div class="flex-col text-sm sm:p-3 bg-secondary>{{ $quality->value }}</div>
+                            <div class="inline-flex text-sm">{{ $quality->value }}</div>
                         @endforeach
                     </div>
                     <div>{!! $recipe->html !!}</div>
