@@ -19,10 +19,10 @@
                     <a href="{{ route('recipes.show', $recipe) }}"><img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" /></a>
                     <div class="row">
                         @foreach($recipe->categories as $category)
-                            <div class="col bg-light">{{ $category->value }}</div>
+                            <div class="text-sm sm:p-3 bg-primary-500">{{ $category->value }}</div>
                         @endforeach
                         @foreach($recipe->qualities as $quality)
-                            <div class="col bg-info">{{ $quality->value }}</div>
+                            <div class="text-sm sm:p-3 bg-secondary>{{ $quality->value }}</div>
                         @endforeach
                     </div>
                     <div>{!! $recipe->html !!}</div>
