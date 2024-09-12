@@ -4,7 +4,7 @@
             {{ __('Изменение рецепта') }}
         </h2>
     </x-slot>
-{{ var_dump($ingredients) }}
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
@@ -55,7 +55,7 @@
                     </form>
                     <div class="mt-12">
                         <h2 id="ingredients" class="text-2xl font-semibold">Ингредиенты</h2>
-                        @if(!$recipe->ingredients())
+                        @if(empty($recipe->ingredients))
                             <p>Ингредиенты не добавлены</p>
                         @endif
                             <form action="{{ route('recipes.ingredients.store', $recipe) }}" method="POST" class="mt-2" enctype="multipart/form-data">
@@ -73,7 +73,7 @@
                                 </div>
                                 <x-primary-button type="submit">Добавить ингредиент</x-primary-button>
                             </form>
-                        @foreach($recipe->ingredients() ?? [] as $ingredient)
+                        @foreach($recipe->ingredients as $ingredient)
                             <div class="row">
                                 <div class="col bg-light border-bottom">{{ $ingredient->value }}</div>
                                 <div class="col bg-light border-bottom bold">{{ $ingredient->quantity }}</div>
@@ -94,7 +94,7 @@
 
                     <div class="mt-12">
                         <h2 id="ingredients" class="text-2xl font-semibold">Приготовление</h2>
-                        @if(!$steps)
+                        @if(empty($recipe->steps))
                             <p>Способ приготовления не добавлен</p>
                         @endif
                         <form action="{{ route('recipes.steps.store', $recipe) }}" method="POST" class="mt-2">
@@ -106,7 +106,7 @@
                             <textarea name="description" id="description" cols="30" rows="5" class="w-full">{{ old('description') }}</textarea>
                             <x-primary-button type="submit">Добавить шаг</x-primary-button>
                         </form>
-                        @foreach($steps ?? [] as $step)
+                        @foreach($recipe->steps as $step)
                             <div class="row">
                                 <div class="col bg-light border-bottom">
                                     <img src="/storage/{{ $step->photo_url }}" alt="{{ $loop->iteration }}" />
