@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header" class="p-4 sm:p-8">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-gray-800 dark:text-gray-200 leading-tight">
             <a href="{{ route('recipes.index') }}">{{ __('Рецепты') }}</a> &gt;  {{ $recipe->value }}
         </h2>
     </x-slot>
@@ -10,13 +10,15 @@
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                 <div>
-            <h1 class="text-3xl font-semibold mt-5">{{ $recipe->value }}</h1>
-            <div class="mt-10">
-                <span class="text-sm text-gray-600">
-                    {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
-                </span>
-            </div>
-            <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
+                    <h1 class="text-3xl font-semibold mt-5">{{ $recipe->value }}</h1>
+                    <div class="mt-10">
+                        <span class="text-xl text-gray-600">
+                            {{ $recipe->created_at->diffForHumans() }} by {{ $recipe->user->name }}
+                        </span>
+                    </div>
+                    <div class="mt-10">
+                        <img src="/storage/{{ $recipe->photo_url }}" alt="{{ $recipe->value }}" />
+                    </div>
             <div class="row p-5">
                 @foreach($recipe->categories as $category)
                     <div class="col"><span class="bg-light p-3">{{ $category->value }}</span></div>
