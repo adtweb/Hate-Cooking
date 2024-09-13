@@ -47,7 +47,7 @@ class RecipeController extends Controller
         $recipe->categories()->attach($request->categories);
         $recipe->qualities()->attach($request->qualities);
 
-        return to_route('recipes.edit', ['recipe' => $recipe->id]);
+        return to_route('recipes.edit', ['recipe' => $recipe->slug]);
     }
 
     /**
